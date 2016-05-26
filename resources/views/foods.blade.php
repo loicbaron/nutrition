@@ -36,20 +36,16 @@
 </div>
 <br>
 
-            <div class="panel panel-default">
+            <div class="panel panel-default" id="result" style="display:none;">
 
-                <div class="panel-heading">
-                <h1>Foods List</h1>
+                <div class="panel-heading" id="name">
                 </div>
 
                 <div class="panel-body">
-                    <?php
-                    foreach ($foods as $food) {
-                        echo "<h4>".$food->name."</h4>";
-                        echo "energy in Kcal: ".$food->energy_kcal."<br>";
-                        echo "energy in Kj: ".$food->energy_kj."<br>";
-                    }
-                    ?>
+                    <div class="container" style="max-width:100%;">
+                        <div class="row" id="composition">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,14 +63,15 @@ $(document).ready(function(){
       //local: ["dog", "dag","pig", "moose"],
       limit: 2,
       remote: {
-        url: "/json/food",
+        url: "/json/food?query=%QUERY",
+        wildcard: '%QUERY',
       }
     });
 
     $('#bloodhound .typeahead').typeahead({
       hint: true,
       highlight: true,
-      minLength: 1
+      //minLength: 1
     },
     {
       name: 'data',
@@ -82,8 +79,17 @@ $(document).ready(function(){
       source: data
     }).on('typeahead:selected', function(event, data){            
         console.log(data.id);
-        //$('.typeahead').val(data.code);        
+        $('#result').show();
+        $('#name').html('<h1>'+data.name+'</h1>');
+        $('#composition').html('');
+        var hide=['id','name', 'image', 'created_at', 'updated_at']
+        $.each( data, function( key, value ) {
+            if (hide.indexOf(key) < 0) {
+                $('#composition').append('<div class="col-sm-3"><b>'+key+': </b>'+value+'</div>');
+            }
+        }); 
     });
+
 });
 </script>
 @endsection

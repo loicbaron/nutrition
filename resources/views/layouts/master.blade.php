@@ -20,7 +20,7 @@
         @show
         -->
         <div class="container-fluid">
-            <div class="page-header">
+            <div class="page-header" style="margin-top: 10px;">
                 <h1>Food Composition Database</h1>
                 <div class="row">&nbsp;</div>
                 <div class="row">
