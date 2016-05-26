@@ -78,7 +78,11 @@ $(document).ready(function(){
     },
     {
       name: 'data',
+      displayKey: 'name',
       source: data
+    }).on('typeahead:selected', function(event, data){            
+        console.log(data.id);
+        //$('.typeahead').val(data.code);        
     });
 });
 </script>
