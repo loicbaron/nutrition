@@ -37,19 +37,24 @@
                 </div>
             </div>
         </div>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Search Food</a></li>
-      <li><a href="#">Food portion photograph book</a></li>
-      <li><a href="#">ANTRAC Project</a></li>
-      <li><a href="#">Contact Us</a></li> 
-    </ul>
-  </div>
-</nav>
-        <div class="container">
-            @yield('content')
-        </div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Search Food</a></li>
+          <li><a href="#">Food portion photograph book</a></li>
+          <li><a href="#">ANTRAC Project</a></li>
+          <li><a href="#">About</a></li> 
+          <li><a href="#">Contact Us</a></li> 
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+        @yield('content')
+    </div>
+    <footer class="footer navbar-fixed-bottom" style="background-color:#f5f5f5;height:60px;">
+      <div class="container">
+        <p class="text-muted" style="margin-top:20px;margin-bottom:20px;">This web interface has been built using <a href="http://onelab.eu" target="_blank"><img src="/images/onelab.png" style="height:30px;padding-left:5px;padding-right:5px;"></a> code is available at <a href="https://github.com/loicbaron/nutrition" target="_blank"><img src="/images/github.png" style="height:30px;padding-left:5px;padding-right:5px;"></a></p>
+      </div>
+    </footer>
     </body>
 </html>

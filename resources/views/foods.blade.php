@@ -6,6 +6,16 @@
     @parent
     <script src="/js/typeahead.bundle.js"></script>
     <link rel="stylesheet" href="/css/typeahead.css">
+    <script type="text/javascript">
+    function isInt(n){
+        return Number(n) === n && n % 1 === 0;
+    }
+    function isFloat(n){
+        return Number(n) === n && n % 1 !== 0;
+    }
+    </script>
+
+
 @endsection
 
 <!--
@@ -44,6 +54,11 @@
                 <div class="panel-body">
                     <div class="container" style="max-width:100%;">
                         <div class="row" id="composition">
+                        </div>
+                        <br><br>
+                        <div class="row" id="quantity">
+                            Quantity in grams: <input type="number" id="grams" value="100"> (g)
+                            <input type="hidden" id="previous_grams" value="100">
                         </div>
                     </div>
                 </div>
@@ -85,11 +100,27 @@ $(document).ready(function(){
         var hide=['id','name', 'image', 'created_at', 'updated_at']
         $.each( data, function( key, value ) {
             if (hide.indexOf(key) < 0) {
-                $('#composition').append('<div class="col-sm-3"><b>'+key+': </b>'+value+'</div>');
+                if(isFloat(value)){
+                    value = (value).toFixed(2);
+                }
+                $('#composition').append('<div class="col-sm-3"><b>'+key+': </b><div class="val" style="display: inline-block">'+value+'</div></div>');
             }
         }); 
     });
-
+    $('#grams').change(function() {
+        var previous_quantity = $("#previous_grams").val();
+        var new_quantity = this.value;
+        var collection = $(".val");
+        collection.each(function(k,v) {
+            var ref = v.innerText;
+            var new_val = (ref / previous_quantity) * new_quantity;
+            if(isFloat(new_val)){
+                new_val = (new_val).toFixed(2);
+            }
+            this.innerText = new_val;
+        });
+        $("#previous_grams").val(new_quantity);
+    });
 });
 </script>
 @endsection
