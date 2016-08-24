@@ -15,6 +15,7 @@ class CreateFoodsTable extends Migration
         Schema::create('foods', function (Blueprint $table) {
             $table->increments('id');
             $table->text('name');
+            $table->text('type');
             $table->string('image');
             $table->float('energy_kcal');
             $table->float('energy_kj');

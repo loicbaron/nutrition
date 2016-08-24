@@ -19,7 +19,8 @@ class Food extends Model
      * @var array
      */
     protected $fillable = [
-        'nom',
+        'name',
+        'type',
         'energy_kcal',
         'energy_kj',
         'water',
