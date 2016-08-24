@@ -1,0 +1,9 @@
+.selected {
+	background-color:red;
+}
+.selector {
+    padding-bottom: 5px !important;
+    padding-top: 5px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
