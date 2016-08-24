@@ -12,8 +12,22 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/food');
 });
 
 Route::resource('food', 'FoodController');
 Route::get('json/food', 'FoodController@json');
+
+
+Route::get('/about', function () {
+    return view('about');
+});
+Route::get('/contact', function () {
+    return view('contact');
+});
+Route::get('/photos', function () {
+    return view('photos');
+});
+Route::get('/project', function () {
+    return view('project');
+});
