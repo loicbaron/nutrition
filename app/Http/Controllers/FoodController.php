@@ -55,7 +55,7 @@ class FoodController extends Controller
         $portions = json_decode($food->portions, true);
         foreach($portions as $key => $p){
             $result = array_fill_keys(array_keys($p), null);
-            $result["type"] = $p["type"];
+            unset($result["type"]);
             $dir = "images/photos/".$p["type"];
             $files1 = scandir($dir);
             $num = sprintf('%03d', $food->Code_aliment);
@@ -65,7 +65,7 @@ class FoodController extends Controller
                     $result[$file_name[2]] = $value;
                 }
             }
-            $results[] = $result;
+            $results[$p["type"]] = $result;
         }
         $food->images = json_encode($results);
         $food->save();
