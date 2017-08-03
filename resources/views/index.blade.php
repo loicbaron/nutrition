@@ -1,9 +1,10 @@
 @extends('layouts.master')
 
-@section('title', 'List of food items')
+@section('title', 'Search for food items')
 
 @section('head')
     @parent
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/js/typeahead.bundle.js"></script>
     <link rel="stylesheet" href="/css/typeahead.css">
     <script type="text/javascript">
@@ -26,7 +27,8 @@
 -->
 
 @section('content')
-
+<div class="info-icons">
+</div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -35,22 +37,21 @@
                 {{ session('status') }}
             </div>
             @endif
-<!--
-<div id="the-basics">
-  <input class="typeahead" type="text" placeholder="States of USA">
-</div>
--->
-<div id="bloodhound">
-  <input class="typeahead" type="text" placeholder="Search food">
-</div>
-<br>
 
+            <div id="scrollable-dropdown-menu">
+                <input class="typeahead" type="text" placeholder="Search food" />
+            </div>
+            <br>
+        </div>
+        <div class="col-md-12">
             <div class="panel panel-default" id="result" style="display:none;">
 
                 <div class="panel-heading" id="name">
                 </div>
 
                 <div class="panel-body">
+
+                    <br>
                     <div class="container" style="max-width:100%;">
                         <div class="row" id="composition">
                         </div>
@@ -75,14 +76,14 @@ $(document).ready(function(){
       // `states` is an array of state names defined in "The Basics"
       //local: s
       //local: ["dog", "dag","pig", "moose"],
-      limit: 2,
+      //limit: 2,
       remote: {
         url: "/json/food?query=%QUERY",
         wildcard: '%QUERY',
       }
     });
 
-    $('#bloodhound .typeahead').typeahead({
+    $('#scrollable-dropdown-menu .typeahead').typeahead({
       hint: true,
       highlight: true,
       //minLength: 1
@@ -96,7 +97,15 @@ $(document).ready(function(){
         $('#result').show();
         $('#name').html('<h1>'+data.name+'</h1>');
         $('#composition').html('');
-        var hide=['id','name', 'image', 'created_at', 'updated_at']
+        var hide=['id',
+                 'name', 
+                 'images', 
+                 'created_at', 'updated_at',
+                 'Code_categorie',
+                 'Categorie',
+                 'Code_aliment',
+                 'portions',
+                 ]
         $.each( data, function( key, value ) {
             if (hide.indexOf(key) < 0) {
                 if(isFloat(value)){

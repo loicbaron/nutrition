@@ -28,7 +28,7 @@ class FoodController extends Controller
     public function foods()
     {
         //
-        return view('foods', ['foods' => Food::all()]);
+        return view('admin', ['foods' => Food::all()]);
     }
     /**
      * Display a JSON of the resource.

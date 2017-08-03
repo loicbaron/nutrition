@@ -10,14 +10,12 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('/', function () {
-    return redirect('/food');
-});
-
-Route::resource('food', 'FoodController');
+Route::get('/', 'FoodController@index');
+Route::resource('food', 'FoodController@index');
+Route::resource('admin', 'FoodController@foods');
 Route::get('json/food', 'FoodController@json');
 
+Route::get('sync/images/{id}', 'FoodController@syncImages');
 
 Route::get('/about', function () {
     return view('about');
@@ -27,6 +25,9 @@ Route::get('/contact', function () {
 });
 Route::get('/photos', function () {
     return view('photos');
+});
+Route::get('/portions', function () {
+    return view('portions');
 });
 Route::get('/project', function () {
     return view('project');

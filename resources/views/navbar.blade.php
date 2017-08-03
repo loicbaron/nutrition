@@ -12,7 +12,11 @@ if(!isset($active)){
       @else
       <li><a href="/">Search Food</a></li>
       @endif
-
+      @if ($active === 'portions')
+      <li class="active"><a href="/portions">Portions Evaluation</a></li>
+      @else
+      <li><a href="/portions">Portions Evaluation</a></li>
+      @endif
       <!-- <li><a href="#">Food portion photograph book</a></li> -->
       @if ($active === 'project')
       <li class="active"><a href="/project">ANTRAC Project</a></li>
