@@ -22,7 +22,7 @@
         -->
         <div class="container-fluid">
             <div class="page-header" style="margin-top: 10px;">
-                <h1>Food Composition Database</h1>
+                <h1><a href="/">Food Composition Database</a></h1>
                 <div class="row">&nbsp;</div>
                 <div class="row">
                     <div class="col-sm-4">
@@ -45,10 +45,12 @@
         @yield('content')
     </div>
     <br>
+    <!--
     <footer class="footer navbar-fixed-bottom" style="background-color:#f5f5f5;height:60px;">
       <div class="container">
-        <p class="text-muted" style="margin-top:20px;margin-bottom:20px;">This web interface has been built using <a href="http://onelab.eu" target="_blank"><img src="/images/onelab.png" style="height:30px;padding-left:5px;padding-right:5px;"></a> code is available at <a href="https://github.com/loicbaron/nutrition" target="_blank"><img src="/images/github.png" style="height:30px;padding-left:5px;padding-right:5px;"></a></p>
+        <p class="text-muted" style="margin-top:20px;margin-bottom:20px;">code available at <a href="https://github.com/loicbaron/nutrition" target="_blank"><img src="/images/github.png" style="height:30px;padding-left:5px;padding-right:5px;"></a></p>
       </div>
     </footer>
+    -->
     </body>
 </html>
