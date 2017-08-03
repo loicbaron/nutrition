@@ -11,11 +11,21 @@ use App\Food;
 class FoodController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the home view to search for food.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+        //
+        return view('index', ['foods' => Food::all()]);
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function foods()
     {
         //
         return view('foods', ['foods' => Food::all()]);
@@ -29,6 +39,40 @@ class FoodController extends Controller
     {
         //
         return view('json_foods', ['foods' => Food::all()]);
+    }
+    /**
+     * Synchronize the images files with the food stored in DB. 
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function syncImages($id)
+    {
+        // TODO: Should create a Job and use Queues
+        // https://laravel.com/docs/master/queues
+        $key = "adults";
+        $dir = "images/photos/".$key;
+        $files1 = scandir($dir);
+        $max = 0;
+
+        $food = Food::find($id);
+
+            // Analyze the max similar_text in images names
+            foreach ($files1 as $value){
+                $common = similar_text("$food->name", $value);
+                if($common>$max){
+                    $max = $common;
+                };
+            }
+            // Add the image name to the result only if it reaches the max
+            foreach ($files1 as $value){
+                $common = similar_text("$food->name", $value);
+                if($common==$max){
+                    $result[$key][] = $value;
+                };
+            }
+            $food->images = json_encode($result);
+            $food->save();
+        return $food->images; 
     }
     /**
      * Show the form for creating a new resource.
