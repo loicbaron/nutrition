@@ -33,12 +33,12 @@
 </div>
 <div class="container-fluid col-md-12">
     <div class="row">
-            <div id="adult" class="col-md-1 selected type" style="margin: 0px 0px 0px 0px;padding-right:0px;padding-left: 0px;">
+            <div id="adult" class="col-md-1 selected type" style="margin: 0px 0px 0px 0px;padding-right:0px;padding-left: 0px; cursor:pointer;">
             <div style="background-color:white;margin: 1px 1px 1px 1px;">
             <i class="fa fa-male" aria-hidden="true" style="font-size:60px;background-color:white;"></i>
             </div>
             </div>
-            <div id="child" class="col-md-1 type" style="margin: 0px 0px 0px 0px;padding-right:0px;padding-left: 0px;">
+            <div id="child" class="col-md-1 type" style="margin: 0px 0px 0px 0px;padding-right:0px;padding-left: 0px; cursor:pointer;">
             <div style="background-color:white;margin: 1px 1px 1px 1px;">
 
             <i class="fa fa-child" aria-hidden="true" style="font-size:40px;"></i>
@@ -56,30 +56,35 @@
             </div>
             <br>
         </div>
-        <div class="col-md-12">
-        &nbsp;
-        </div>
-        <div class="col-md-12">
-            <div id="portions_container" style="max-width:100%;">
+        <div class="col-md-12" style="padding: 0px;padding-right: 15px;">
+            <div class="chevron">
+            <i class="fa fa-chevron-left" aria-hidden="true" style="font-size:25;"></i>
             </div>
-            <div id="image_container" class="container" style="max-width:100%;">
-            </div>
-            <div class="panel panel-default" id="result" style="display:none;">
-
-                <div class="panel-heading" id="name">
+            <div class="container testimonial-group" style="max-width:100%; display:inline-block !important; width: 99% !important;">
+                <div id="portions_container" class="row text-center">
                 </div>
+            </div>
+            <div class="chevron">
+            <i class="fa fa-chevron-right" aria-hidden="true" style="font-size:25;"></i>
+            </div>
+        </div>
+        <div id="image_container" class="container" style="max-width:100%;">
+        </div>
+        <div class="panel panel-default" id="result" style="display:none;">
 
-                <div class="panel-body">
+            <div class="panel-heading" id="name">
+            </div>
 
-                    <br>
-                    <div class="container" style="max-width:100%;">
-                        <div class="row" id="composition">
-                        </div>
-                        <br><br>
-                        <div class="row" id="quantity">
-                            Quantity in grams: <input type="number" id="grams" value="100" disabled="disabled"> (g)
-                            <input type="hidden" id="previous_grams" value="100">
-                        </div>
+            <div class="panel-body">
+
+                <br>
+                <div class="container" style="max-width:100%;">
+                    <div class="row" id="composition">
+                    </div>
+                    <br><br>
+                    <div class="row" id="quantity">
+                        Quantity in grams: <input type="number" id="grams" value="100" disabled="disabled"> (g)
+                        <input type="hidden" id="previous_grams" value="100">
                     </div>
                 </div>
             </div>
@@ -88,6 +93,7 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
+    $('.chevron').hide();
     var type = "adult";
     var portions = [];
     var images = [];
@@ -107,9 +113,9 @@ $(document).ready(function(){
                     if(k != 'type'){
                         var img = render_image(type,k);
                         if(img!=null){
-                        $('#portions_container').append('<div class="selector" style="display:inline-block;width:14%" data-portion="'+ps[k]+'"><div>'+k+'</div><div>'+img+'</div></div>');
+                        $('#portions_container').append('<div class="selector col-xs-4" data-portion="'+ps[k]+'"><div style="font-size:20pt;">'+k+'</div><div>'+img+'</div></div>');
                         }else{
-                        $('#portions_container').append('<div class="selector" style="display:inline-block;width:14%;height:109px;" data-portion="'+ps[k]+'"><div>'+k+'</div></div>');
+                        $('#portions_container').append('<div class="selector col-xs-4" data-portion="'+ps[k]+'"><div style="font-size:40pt;">'+k+'</div></div>');
                         }
                     }
                 }
@@ -156,6 +162,9 @@ $(document).ready(function(){
         $('#image_container').html('');
         $('#portions_container').html('');
 
+        if(data.portions.length){
+            $('.chevron').css('display', 'inline-block');
+        }
         portions = JSON.parse(data.portions);
         images = JSON.parse(data.images);
         render_portions(portions);

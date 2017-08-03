@@ -1,9 +1,12 @@
+.container{
+	width:90% !important;
+}
 .selected {
 	background-color: #cfe4ff;
     color: #0064a7;
     border-style: solid;
     border-width: 1px;
-    border-color: #2781f5;
+    border-color: #2781f5 !important;
     font-weight: bold;
 }
 .selector {
@@ -41,3 +44,28 @@
   overflow-y: auto;
 }
 
+/* The heart of the matter */
+.testimonial-group > .row {
+  overflow-x: auto !important;
+  white-space: nowrap !important;
+}
+.testimonial-group > .row > .col-xs-4 {
+  display: inline-block !important;
+  float: none !important;
+  width:400px;
+}
+.col-xs-4 {
+  border-style:solid;
+  border-width:1px;
+  border-color:#999;
+  cursor:pointer;
+}
+.chevron {
+  display: inline-block;
+  position: absolute;
+  padding-top: 150px;
+  z-index: 99;
+  background-color: #ccc;
+  height: 100%;
+  cursor:pointer;
+}
