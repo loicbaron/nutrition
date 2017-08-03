@@ -49,29 +49,22 @@ class FoodController extends Controller
     {
         // TODO: Should create a Job and use Queues
         // https://laravel.com/docs/master/queues
-        $key = "adults";
-        $dir = "images/photos/".$key;
-        $files1 = scandir($dir);
         $max = 0;
-
         $food = Food::find($id);
-
-            // Analyze the max similar_text in images names
+        $portions = json_decode($food->portions, true);
+        foreach($portions as $key => $p){
+            $dir = "images/photos/".$p["type"];
+            $files1 = scandir($dir);
+            $num = sprintf('%03d', $food->Code_aliment);
             foreach ($files1 as $value){
-                $common = similar_text("$food->name", $value);
-                if($common>$max){
-                    $max = $common;
-                };
+                if (strpos($value, '_'.$num.'_') !== false) {
+                    $file_name = explode('_', $value);
+                    $portions[$key][$file_name[2]] = $value;
+                }
             }
-            // Add the image name to the result only if it reaches the max
-            foreach ($files1 as $value){
-                $common = similar_text("$food->name", $value);
-                if($common==$max){
-                    $result[$key][] = $value;
-                };
-            }
-            $food->images = json_encode($result);
-            $food->save();
+        }
+        $food->images = json_encode($portions);
+        $food->save();
         return $food->images; 
     }
     /**
