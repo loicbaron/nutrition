@@ -50,20 +50,24 @@ class FoodController extends Controller
         // TODO: Should create a Job and use Queues
         // https://laravel.com/docs/master/queues
         $max = 0;
+        $results = Array();
         $food = Food::find($id);
         $portions = json_decode($food->portions, true);
         foreach($portions as $key => $p){
+            $result = array_fill_keys(array_keys($p), null);
+            $result["type"] = $p["type"];
             $dir = "images/photos/".$p["type"];
             $files1 = scandir($dir);
             $num = sprintf('%03d', $food->Code_aliment);
             foreach ($files1 as $value){
                 if (strpos($value, '_'.$num.'_') !== false) {
                     $file_name = explode('_', $value);
-                    $portions[$key][$file_name[2]] = $value;
+                    $result[$file_name[2]] = $value;
                 }
             }
+            $results[] = $result;
         }
-        $food->images = json_encode($portions);
+        $food->images = json_encode($results);
         $food->save();
         return $food->images; 
     }
