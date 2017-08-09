@@ -93,7 +93,6 @@ $(document).ready(function(){
       displayKey: 'name',
       source: data
     }).on('typeahead:selected', function(event, data){            
-        console.log(data.id);
         $('#result').show();
         $('#name').html('<h1>'+data.name+'</h1>');
         $('#composition').html('');

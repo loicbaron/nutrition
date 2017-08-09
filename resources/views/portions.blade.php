@@ -136,7 +136,6 @@ $(document).ready(function(){
       displayKey: 'name',
       source: data
     }).on('typeahead:selected', function(event, data){            
-        console.log(data.id);
         $('#result').show();
         $('#name').html('<h1>'+data.name+'</h1>');
         $('#composition').html('');
@@ -159,7 +158,6 @@ $(document).ready(function(){
                 $('#composition').append('<div class="col-sm-3"><b>'+key+': </b><div class="val" style="display: inline-block">'+value+'</div></div>');
             }
             if(key=='portions'){
-                console.log(value);
                 portions = JSON.parse(value);
                 render_portions(portions);
             }
@@ -190,7 +188,6 @@ $(document).ready(function(){
         $('div#portions_container div').removeClass("selected");
         $(this).toggleClass("selected");
         gr = $(this).attr("data-portion");
-        console.log(gr);
         $("#grams").val(gr);
         $("#grams").trigger("change");
     });
@@ -199,13 +196,11 @@ $(document).ready(function(){
         $('div#image_container div').removeClass("selected");
         $(this).toggleClass("selected");
         src = $("img", this).attr("src");
-        console.log(src);
     });
     $('div.type').on('click', function(){
         $('.type').removeClass("selected");
         $(this).toggleClass("selected");
         type = $(this).attr("id");
-        console.log(type);
         render_portions(portions);
     });
 
