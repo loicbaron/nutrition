@@ -26,6 +26,9 @@ Route::get('/contact', function () {
 Route::get('/photos', function () {
     return view('photos');
 });
+Route::get('/24h', function () {
+    return view('24h');
+});
 Route::get('/portions', function () {
     return view('portions');
 });

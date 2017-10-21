@@ -22,6 +22,11 @@ if(!isset($active)){
       @else
       <li><a href="/photos">Photos Evaluation</a></li>
       @endif
+      @if ($active === '24h')
+      <li class="active"><a href="/24h">24h recall</a></li>
+      @else
+      <li><a href="/24h">24h recall</a></li>
+      @endif
       <!-- <li><a href="#">Food portion photograph book</a></li> -->
       @if ($active === 'project')
       <li class="active"><a href="/project">ANTRAC Project</a></li>
