@@ -146,7 +146,7 @@ var save = function(item){
     });
     // save total
     localStorage.setItem("total",JSON.stringify(oTotal));
-    $("#result").html("<div class='alert alert-success' style='height:100px;'><div class='col-md-12'><strong>Food added</strong> to your 24h recall</div><div class='col-md-12'><div class='col-md-6'><button onclick='window.location.reload();'>Add other items</button></div><div class='col-md-6'><button onclick=window.location.replace('/24h');>Finalize 24h recall</button></div></div></div>");   
+    $("#result").html("<div class='alert alert-success' style='height:100px;'><div class='col-md-12'><strong>Food added</strong> to your 24h recall</div><div class='col-md-12'><div class='col-md-6'><button class='btn btn-primary' style='width:150px;' onclick='window.location.reload();'>Add other items</button></div><div class='col-md-6'><button class='btn btn-success' style='width:150px;' onclick=window.location.replace('/24h');>Finalize 24h recall</button></div></div></div>");   
     //setTimeout(function(){ window.location.reload(); }, 2000);
 };
 $(document).ready(function(){
@@ -218,7 +218,7 @@ $(document).ready(function(){
         // XXX TODO: 
         // store the portion to display the picture at the end in the 24h recall
 
-        var buttonAdd = "<div style='position:absolute; right:10px; margin-top:-40px;'><button class='btn-primary' id='add' value='"+data.name+"' disabled><i class='fa fa-plus-circle' aria-hidden='true'></i> Add</button></div>";
+        var buttonAdd = "<div style='position:absolute; right:10px; margin-top:-40px;'><button class='btn btn-primary' style='width:150px;' id='add' value='"+data.name+"' disabled><i class='fa fa-plus-circle' aria-hidden='true'></i> Add</button></div>";
         $('#name').html('<h1><div>'+data.name+'</div> '+buttonAdd+'</h1>');
         $("#add").click(function() {
             save(data.name);

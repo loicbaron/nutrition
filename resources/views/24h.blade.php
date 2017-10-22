@@ -15,15 +15,24 @@
 </div>
 <div class="container-fluid col-md-12">
     <div class="row">
-
         <div class="panel panel-default" id="recall">
             <div class="panel-heading" id="name" style="display:inline-block; width:100%;">
-            <h2>24h recall</h2>
+            <h2>
+                <div>24h recall</div>
+                <div style='position:absolute; right:10px; margin-top:-40px;'>
+                    <button class='btn btn-primary' style='width:150px;' onclick="window.location.replace('/photos');">
+                    <i class='fa fa-plus-circle' aria-hidden='true'></i> Add
+                    </button>
+                </div>
+            </h2>
             </div>
 
             <div class="table-responsive" id="list">
             </div>
         </div>
+    </div>
+    <div class="row">
+    <button type="button" class="btn btn-danger" style="width:150px;" onclick="localStorage.clear();sessionStorage.clear();window.location.reload();">Clear</button>
     </div>
 </div>
 <script type="text/javascript">
