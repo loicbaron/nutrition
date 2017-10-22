@@ -72,7 +72,7 @@
         </div>
         <div class="panel panel-default" id="result" style="display:none;">
 
-            <div class="panel-heading" id="name">
+            <div class="panel-heading" id="name" style="display:inline-block; width:100%;">
             </div>
 
             <div class="panel-body">
@@ -83,8 +83,16 @@
                     </div>
                     <br><br>
                     <div class="row" id="quantity">
+                        <div class=col-md-3">
+                        </div>
+                        <div class=col-md-3">
                         Quantity in grams: <input type="number" id="grams" value="100" disabled="disabled"> (g)
                         <input type="hidden" id="previous_grams" value="100">
+                        </div>
+                        <div class=col-md-3">
+                        </div>
+                        <div class=col-md-3">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -92,6 +100,55 @@
     </div>
 </div>
 <script type="text/javascript">
+var save = function(item){
+    if(typeof sessionStorage==undefined) {
+        alert("Web Browser error, please update to a recent browser: sessionStorage not supported");
+        return;
+    }
+    if(typeof localStorage==undefined) {
+        alert("Web Browser error, please update to a recent browser: localStorage not supported");
+        return;
+    }
+    // Get the current item composition
+    var compo = sessionStorage.getItem("composition");
+    var oCompo = JSON.parse(compo);
+    var obj = {[item]:oCompo}; 
+    // Get the 24h recall
+    var h24 = localStorage.getItem('h24');
+    if(h24!=null) {
+        var oH24 = JSON.parse(h24);
+    }else{
+        var oH24 = Array();
+    }
+    // Add the item to the 24h recall
+    oH24.push(obj);
+    localStorage.setItem("h24",JSON.stringify(oH24));
+    // Get the total
+    var total = localStorage.getItem("total");
+    console.log(total);
+    if(total!=null) {
+        var oTotal = JSON.parse(total);
+    }else{
+        console.log("create array");
+        var oTotal = Array();
+    }
+    console.log(oTotal);
+    // Add the item composition to the total
+    $.each(oCompo, function(i, val){
+        console.log(i);
+        // initalize the value to 0
+        if(oTotal[i]==undefined){
+            oTotal.push('0');
+        }
+        console.log(oTotal[i]);
+        console.log(val);
+        oTotal[i] = parseFloat(oTotal[i]) + parseFloat(val);
+    });
+    // save total
+    localStorage.setItem("total",JSON.stringify(oTotal));
+    $("#result").html("<div class='alert alert-success' style='height:100px;'><div class='col-md-12'><strong>Food added</strong> to your 24h recall</div><div class='col-md-12'><div class='col-md-6'><button onclick='window.location.reload();'>Add other items</button></div><div class='col-md-6'><button onclick=window.location.replace('/24h');>Finalize 24h recall</button></div></div></div>");   
+    //setTimeout(function(){ window.location.reload(); }, 2000);
+};
 $(document).ready(function(){
     $('.chevron').hide();
     var type = "adult";
@@ -145,6 +202,7 @@ $(document).ready(function(){
       }
     });
 
+
     $('#scrollable-dropdown-menu .typeahead').typeahead({
       hint: true,
       highlight: true,
@@ -156,7 +214,15 @@ $(document).ready(function(){
       source: data
     }).on('typeahead:selected', function(event, data){            
         $('#result').show();
-        $('#name').html('<h1>'+data.name+'</h1>');
+
+        // XXX TODO: 
+        // store the portion to display the picture at the end in the 24h recall
+
+        var buttonAdd = "<div style='position:absolute; right:10px; margin-top:-40px;'><button class='btn-primary' id='add' value='"+data.name+"' disabled><i class='fa fa-plus-circle' aria-hidden='true'></i> Add</button></div>";
+        $('#name').html('<h1><div>'+data.name+'</div> '+buttonAdd+'</h1>');
+        $("#add").click(function() {
+            save(data.name);
+        });
         $('#composition').html('');
         $('#image_container').html('');
         $('#portions_container').html('');
@@ -190,6 +256,9 @@ $(document).ready(function(){
         var previous_quantity = $("#previous_grams").val();
         var new_quantity = this.value;
         var collection = $(".val");
+        //var compo = sessionStorage.getItem("composition");
+        //var oCompo = JSON.parse(compo);
+        oCompo = Array();
         collection.each(function(k,v) {
             var ref = v.innerText;
             var new_val = (ref / previous_quantity) * new_quantity;
@@ -197,8 +266,15 @@ $(document).ready(function(){
                 new_val = (new_val).toFixed(2);
             }
             this.innerText = new_val;
+            oCompo[k] = new_val;
         });
+        if(typeof sessionStorage!='undefined') {
+            sessionStorage.setItem("composition",JSON.stringify(oCompo));
+        }else{
+            alert("Web Browser error, please update to a recent browser: sessionStorage not supported");
+        }
         $("#previous_grams").val(new_quantity);
+        $("#add").prop("disabled",false);
     });
     $('div#portions_container').on('click','.selector', function(){
         $('div#portions_container div').removeClass("selected");

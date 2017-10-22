@@ -23,9 +23,9 @@ if(!isset($active)){
       <li><a href="/photos">Photos Evaluation</a></li>
       @endif
       @if ($active === '24h')
-      <li class="active"><a href="/24h">24h recall</a></li>
+      <li class="active"><a href="/24h">24h recall <span class="badge"></span></a></li>
       @else
-      <li><a href="/24h">24h recall</a></li>
+      <li><a href="/24h">24h recall <span class="badge"></span></a></li>
       @endif
       <!-- <li><a href="#">Food portion photograph book</a></li> -->
       @if ($active === 'project')
@@ -49,3 +49,23 @@ if(!isset($active)){
     </ul>
   </div>
 </nav>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    var h24 = localStorage.getItem('h24');
+    if(h24!=null) {
+        var oH24 = JSON.parse(h24);
+        console.log(oH24.length);
+    }else{
+        var oH24 = Array();
+    }
+
+    if(oH24.length>0){
+        $(".badge").html(oH24.length);
+    }else{
+        $(".badge").html("");
+    }
+
+});
+</script>
