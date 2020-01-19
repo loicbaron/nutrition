@@ -25,7 +25,7 @@ class FoodController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function foods()
+    public function admin()
     {
         //
         return view('admin', ['foods' => Food::all()]);
