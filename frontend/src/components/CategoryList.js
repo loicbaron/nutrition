@@ -4,10 +4,8 @@ import Category from '../models/Category';
 
 const CategoryList = ({ className, categories }) => (
   <div className={className}>
-    { 
-    categories.map( category => {
-      return <div key={category.id}>{category.name}</div>
-    })
+    {
+    categories.map(category => <div key={category.id}>{category.name}</div>)
     }
   </div>
 );
@@ -20,6 +18,6 @@ CategoryList.propTypes = {
 CategoryList.defaultProps = {
   className: '',
   categories: [],
-}
+};
 
 export default CategoryList;

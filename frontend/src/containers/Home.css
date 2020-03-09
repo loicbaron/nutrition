@@ -16,8 +16,8 @@
 }
 .center {
   justify-content: center;
-  width: 90%;
-  padding-top: 10px;
+  display: flex;
+  width: 100%;
 }
 .home-left {
   padding-left: 24px;

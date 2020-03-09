@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: flex-start;
   padding-top: 12px;
+  align-items: center;
 }
 .header-logo {
   padding-left: 12px;

@@ -1,9 +1,9 @@
 import React from 'react';
-import HeaderComponent from './HeaderComponent';
+import Header from './Header';
 
 describe('HeaderComponent', () => {
-  it('renders HeaderComponent correctly', () => {
-    const subject = <HeaderComponent />
+  it('renders Header correctly', () => {
+    const subject = <Header />;
     expect(subject).toMatchSnapshot();
   });
-})
+});

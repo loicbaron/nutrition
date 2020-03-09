@@ -1,19 +1,31 @@
 import React from 'react';
 import './App.css';
-import { IntlProvider } from 'react-intl';
-import messagesEn from './translations/en.json';
-import HeaderComponent from './components/Header/HeaderComponent';
+
+import { IntlProvider, addLocaleData } from 'react-intl';
+import intlEN from 'react-intl/locale-data/en';
+import intlFR from 'react-intl/locale-data/fr';
+import en from './translations/en.json';
+import fr from './translations/fr.json';
+import Page from './components/Layout/Page';
 import AppRouter from './AppRouter';
+import config from './configs/config';
+import Menu from './components/Layout/Menu';
+
+addLocaleData([...intlEN, ...intlFR]);
 
 const messages = {
-  en: messagesEn,
+  en,
+  fr,
 };
 
+const menu = <Menu />;
+
 const App = () => (
-  <IntlProvider locale="en" messages={messages.en}>
+  <IntlProvider locale={config.locale} messages={messages[config.locale]} defaultLocale="en">
     <div className="App">
-      <HeaderComponent />
-      <AppRouter className="application-content" />
+      <Page menu={menu}>
+        <AppRouter className="application-content" />
+      </Page>
     </div>
   </IntlProvider>
 );
