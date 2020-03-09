@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-top: 12px;
+}
+.header-logo {
+  padding-left: 12px;
+}
+.header-cell {
+  padding-left: 48px;
+}
+.main-logo {
+  width: 142px;
+}

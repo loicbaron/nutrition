@@ -1,0 +1,5 @@
+{
+  "Header.title": "My App",
+  "Header.subtitle": "Welcome to My App",
+  "Error.backend": "Failed to fetch data from Backend"
+}

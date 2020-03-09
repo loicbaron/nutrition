@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Upload renders Upload correctly 1`] = `
+<Upload
+  className=""
+  fileUploaded={[Function]}
+/>
+`;

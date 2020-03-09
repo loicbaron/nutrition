@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Clickable renders Clickable correctly 1`] = `
+<Clickable
+  className=""
+  handleClick={[Function]}
+>
+  <React.Fragment />
+</Clickable>
+`;

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Speech renders Speech.initial correctly 1`] = `
+<Speech
+  className=""
+/>
+`;
+
+exports[`Speech renders Speech.travel with empty Travel correctly 1`] = `
+<Speech
+  className=""
+  travel={
+    Travel {
+      "countBountyHunters": 0,
+      "duration": 0,
+      "path": Array [],
+      "probability": 0,
+      "refuel": 0,
+    }
+  }
+/>
+`;
