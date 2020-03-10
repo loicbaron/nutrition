@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import './Home.css';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { CircularProgress } from '@material-ui/core';
-import CategoryList from '../components/CategoryList';
 import fetchService from '../services/fetchService';
-import Category from '../models/Category';
+import Food from '../models/Food';
+import FoodList from './FoodList';
 
-class Home extends Component {
+class FoodListContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: [],
+      foodItems: [],
       isLoading: false,
       error: undefined,
     };
@@ -21,35 +21,36 @@ class Home extends Component {
   }
 
   reset() {
-    this.setState({ categories: [], isLoading: false, error: undefined });
+    this.setState({ foodItems: [], isLoading: false, error: undefined });
   }
 
   async fetchCategories() {
     this.reset();
     this.setState({ isLoading: true });
+    const { categoryId } = this.props;
     try {
-      const result = await fetchService('categories', 'GET');
+      const result = await fetchService(`categories/${categoryId}/food`, 'GET');
       this.setState(
         {
           isLoading: false,
-          categories: result.map(category => Category.fromBlob(category)),
+          foodItems: result.map(item => Food.fromBlob(item)),
         },
       );
     } catch (err) {
-      this.setState({ isLoading: false, categories: [], error: 'Error.backend' });
+      this.setState({ isLoading: false, foodItems: [], error: 'Error.backend' });
     }
   }
 
   render() {
-    const { categories, isLoading, error } = this.state;
+    const { foodItems, isLoading, error } = this.state;
     return (
-      <div className="home">
+      <div>
         { error ? <div className="error"><FormattedMessage id={error} /></div> : <React.Fragment /> }
-        <div className="home-row">
+        <div className="food-row">
           <React.Fragment>
             { isLoading
               ? <div className="center"><CircularProgress /></div>
-              : <CategoryList className="" categories={categories} />
+              : <FoodList foodItems={foodItems} />
             }
           </React.Fragment>
         </div>
@@ -57,5 +58,8 @@ class Home extends Component {
     );
   }
 }
+FoodListContainer.propTypes = {
+  categoryId: PropTypes.number.isRequired,
+};
 
-export default Home;
+export default FoodListContainer;
