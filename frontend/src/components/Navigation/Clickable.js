@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './Clickable.css';
 
-import { anyNumberOfChildren } from './miscellaneousProps';
+import { anyNumberOfChildren } from '../miscellaneousProps';
 
 const ENTER = 13;
 

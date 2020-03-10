@@ -14,3 +14,9 @@
 .main-logo {
   width: 142px;
 }
+.header-title {
+  display: flex;
+  color: white;
+  text-decoration: none;
+  align-items: center;
+}
