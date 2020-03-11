@@ -9,7 +9,6 @@ import fr from './translations/fr.json';
 import Page from './components/Layout/Page';
 import AppRouter from './AppRouter';
 import config from './configs/config';
-import Menu from './components/Layout/Menu';
 
 addLocaleData([...intlEN, ...intlFR]);
 
@@ -18,12 +17,10 @@ const messages = {
   fr,
 };
 
-const menu = <Menu />;
-
 const App = () => (
   <IntlProvider locale={config.locale} messages={messages[config.locale]} defaultLocale="en">
     <div className="App">
-      <Page menu={menu}>
+      <Page>
         <AppRouter className="application-content" />
       </Page>
     </div>

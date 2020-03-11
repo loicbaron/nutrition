@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import './Home.css';
 import { FormattedMessage } from 'react-intl';
 import { CircularProgress } from '@material-ui/core';
 import CategoryList from '../components/CategoryList';
 import fetchService from '../services/fetchService';
 import Category from '../models/Category';
 
-class Home extends Component {
+class CategoryListContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,4 +57,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default CategoryListContainer;

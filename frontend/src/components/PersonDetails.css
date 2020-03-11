@@ -1,0 +1,17 @@
+.flex-center-container {
+  display: flex;
+  min-height: 248px;
+  align-items: center;
+}
+.flex-center-cell {
+  display: flex;
+  justify-content: center;
+}
+.flex-center-content {
+  display: flex;
+  align-items: center;
+  padding-right: 16px;
+}
+.full-width {
+  width: 100%;
+}

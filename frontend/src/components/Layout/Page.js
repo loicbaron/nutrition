@@ -53,7 +53,7 @@ ScrollTop.propTypes = {
 };
 
 export default function Page(props) {
-  const { children, menu } = props;
+  const { children } = props;
   return (
     <React.Fragment>
       <CssBaseline />
@@ -61,7 +61,6 @@ export default function Page(props) {
       <Toolbar id="back-to-top-anchor" />
       <Container>
         <Box my={2}>
-          { menu }
           { children }
         </Box>
       </Container>
@@ -75,9 +74,7 @@ export default function Page(props) {
 }
 Page.propTypes = {
   children: anyNumberOfChildren,
-  menu: anyNumberOfChildren,
 };
 Page.defaultProps = {
   children: undefined,
-  menu: undefined,
-}
+};
