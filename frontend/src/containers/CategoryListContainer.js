@@ -4,6 +4,7 @@ import { CircularProgress } from '@material-ui/core';
 import CategoryList from '../components/CategoryList';
 import fetchService from '../services/fetchService';
 import Category from '../models/Category';
+import './Home.css';
 
 class CategoryListContainer extends Component {
   constructor(props) {
@@ -48,7 +49,7 @@ class CategoryListContainer extends Component {
           <React.Fragment>
             { isLoading
               ? <div className="center"><CircularProgress /></div>
-              : <CategoryList className="" categories={categories} />
+              : <CategoryList className="full-width" categories={categories} />
             }
           </React.Fragment>
         </div>
