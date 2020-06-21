@@ -27,6 +27,7 @@ const FoodItem = ({ item }) => {
       <Paper className={classes.paper}>
         <Grid container spacing={3}>
           <Grid item xs={9}>
+            {item.name}
             <FoodPictures item={item} />
           </Grid>
           <Grid item xs={3}>

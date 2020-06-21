@@ -44,16 +44,14 @@ class FoodListContainer extends Component {
   render() {
     const { foodItems, isLoading, error } = this.state;
     return (
-      <div>
+      <div className="home">
         { error ? <div className="error"><FormattedMessage id={error} /></div> : <React.Fragment /> }
-        <div className="food-row">
-          <React.Fragment>
-            { isLoading
-              ? <div className="center"><CircularProgress /></div>
-              : <FoodList foodItems={foodItems} />
-            }
-          </React.Fragment>
-        </div>
+        <React.Fragment>
+          { isLoading
+            ? <div className="center"><CircularProgress /></div>
+            : <FoodList foodItems={foodItems} />
+          }
+        </React.Fragment>
       </div>
     );
   }
