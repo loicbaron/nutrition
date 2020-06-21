@@ -1,21 +1,84 @@
-version: '3.3'
-
+version: '3'
 services:
-  db:
-    container_name: 'mysql-gppa'
-    image: mysql:5.7
-    restart: always
+
+  # PHP Service
+  gppa_php:
+    build:
+      args:
+        user: www-data
+        uid: 1000
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: gppa_php
+    restart: unless-stopped
+    tty: true
     environment:
-      MYSQL_DATABASE: 'nutrition'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'user'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'password'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'password'
+      SERVICE_NAME: gppa_php
+      SERVICE_TAGS: dev
+      APP_NAME: gppa
+      APP_ENV: dev
+      APP_DEBUG: 'true'
+      APP_URL: http://localhost
+      LOG_CHANNEL: stack
+      DB_CONNECTION: mysql
+      DB_HOST: gppa_db
+      DB_PORT: 3306
+      DB_DATABASE: gppa
+      DB_USERNAME: gppa_user
+      DB_PASSWORD: gppa
+    working_dir: /var/www
+    volumes:
+      - app-volume:/var/www
     ports:
-      # <Port exposed> : < MySQL Port running inside container>
-      - '127.0.0.1:3306:3306'
-    expose:
-      # Opens port 3306 on the container
-      - '3306'
+      - "9000:9000"
+    networks:
+      - app-network
+
+  # Nginx Service
+  gppa_webserver:
+    image: nginx:alpine
+    container_name: gppa_webserver
+    restart: unless-stopped
+    tty: true
+    depends_on:
+      - gppa_php
+      - gppa_db
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - app-volume:/var/www
+    ports:
+      - "127.0.0.1:8080:80"
+    networks:
+      - app-network
+
+  # MySQL Service
+  gppa_db:
+    image: mysql:5.7.22
+    container_name: gppa_db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "127.0.0.1:3306:3306"
+    environment:
+      MYSQL_DATABASE: gppa
+      MYSQL_USER: gppa_user
+      MYSQL_PASSWORD: gppa
+      MYSQL_ROOT_PASSWORD: gppa
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes: 
+      - dbdata:/var/lib/mysql
+    networks:
+      - app-network
+
+# Docker Networks
+networks:
+  app-network:
+    driver: bridge
+
+# Docker Volumes
+volumes:
+    app-volume:
+      driver: local
+    dbdata:
+      driver: local

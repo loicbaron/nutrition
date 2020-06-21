@@ -7,17 +7,20 @@ sudo apt-get install -y php7.2-fpm
 # Install Composer
 exec ./install_composer.sh
 
+# Create an empty /var/www/html folder
+sudo mkdir -p /var/www/html
+
 # Create an empty Laravel project
 cd ~
 composer create-project --prefer-dist laravel/laravel nutrition
-cp -R nutrition /var/www/
+cp -R nutrition /var/www/html/
 
 # Copy code from github: Model, View, Controller
 git clone git@github.com:loicbaron/nutrition.git ./diff
-cp -R diff/* /var/www/nutrition/
+cp -R diff/* /var/www/html/nutrition/
 
 # Deploy images from the archive
-sudo unzip images.zip -d /var/www/nutrition/public/
+sudo unzip images.zip -d /var/www/html/nutrition/public/
 
 # Install MySQL
 sudo apt-get install -y mysql-server
@@ -29,14 +32,14 @@ mysql -e "FLUSH PRIVILEGES;"
 mysql -u laraveluser -p database_name < nutrition.sql
 
 # Configure Laravel access to Database 
-# /var/www/nutrition/.env
-# DB_DATABASE=nutrition
-# DB_USERNAME=laraveluser
-# DB_PASSWORD=password
+# /var/www/html/nutrition/.env
+# DB_DATABASE=gppa
+# DB_USERNAME=gppa_user
+# DB_PASSWORD=gppa
 
 # Configure NGINX to serve the website
-sudo chown -R www-data:www-data /var/www/nutrition/storage
-sudo chown -R www-data:www-data /var/www/nutrition/bootstrap/cache
+sudo chown -R www-data:www-data /var/www/html/nutrition/storage
+sudo chown -R www-data:www-data /var/www/html/nutrition/bootstrap/cache
 sudo cp nginx.nutrition.cfg /etc/nginx/sites-available/nutrition
 sudo ln -s /etc/nginx/sites-available/nutrition /etc/nginx/sites-enabled/
 sudo service nginx restart
