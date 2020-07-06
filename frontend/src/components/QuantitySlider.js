@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Slider } from '@material-ui/core';
 import Food from '../models/Food';
 
-const marks = [
+let marks = [
   {
     value: 0,
     label: '0',
@@ -37,13 +38,16 @@ const marks = [
   },
 ];
 function valuetext(value) {
-  return `${value}°C`;
+  return `${value}`;
 }
 
 function valueLabelFormat(value) {
   return marks[marks.findIndex(mark => mark.value === value)].label;
 }
-const QuantitySlider = ({ item }) => (
+const QuantitySlider = (props) => {
+  const { keys } = props;
+  const myMarks = marks.filter((mark) => keys.includes(mark.label));
+  return (
   <Slider
     defaultValue={0}
     getAriaValueText={valuetext}
@@ -51,14 +55,19 @@ const QuantitySlider = ({ item }) => (
     aria-labelledby="discrete-slider"
     valueLabelDisplay="auto"
     step={1}
-    marks={marks}
+    marks={myMarks}
     min={0}
-    max={7}
-  />
-);
+    max={myMarks.length - 1}
+  />);
+};
 
 QuantitySlider.propTypes = {
   item: Food.shape.isRequired,
+  keys: PropTypes.array,
 };
+
+QuantitySlider.defaultProps = {
+  keys: [],
+}
 
 export default QuantitySlider;

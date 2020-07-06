@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Typography } from '@material-ui/core';
 import Category from '../models/Category';
 import FoodListContainer from './FoodListContainer';
 
@@ -8,7 +9,9 @@ const CategoryList = ({ className, categories }) => (
     {
     categories.map(category => (
       <div key={category.id} className={className}>
-        <h3>{category.name}</h3>
+        <Typography gutterBottom variant="h5" component="h2" key={category.name}>
+          {category.name}
+        </Typography>
         <FoodListContainer key={category.id} categoryId={category.id} />
       </div>
     ))

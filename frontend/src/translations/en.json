@@ -1,5 +1,12 @@
 {
   "Header.title": "My App",
   "Header.subtitle": "Welcome to My App",
-  "Error.backend": "Failed to fetch data from Backend"
+  "Error.backend": "Failed to fetch data from Backend",
+  "Back": "Back",
+  "Next": "Next",
+  "Finish": "Finish",
+  "Reset": "Reset",
+  "Skip": "Skip",
+  "Finished": "All steps completed - you&apos;re finished",
+  "Optional": "Optional"
 }

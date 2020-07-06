@@ -6,16 +6,22 @@ export default class Food {
     return new Food({
       id: 0,
       name: '',
+      images: '',
+      portions: '',
     });
   }
 
   static from(
     id,
     name,
+    images,
+    portions,
   ) {
     return new Food({
       id,
       name,
+      images,
+      portions,
     });
   }
 
@@ -28,15 +34,21 @@ export default class Food {
   constructor({
     id = 0,
     name = '',
-  } = {}) {
+    images = '',
+    portions = '',
+  }) {
     this.id = id;
     this.name = name;
+    this.images = images;
+    this.portions = portions;
   }
 
   static get shape() {
     return PropTypes.shape({
       id: PropTypes.number,
       name: PropTypes.string,
+      images: PropTypes.string,
+      portions: PropTypes.string,
     });
   }
 }

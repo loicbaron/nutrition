@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -23,6 +24,7 @@ const styles = theme => ({
 });
 
 function getSteps() {
+  // TODO: replace hardcoded by translations .json
   return ['Qui êtes vous ?', 'Qu\'avez-vous mangé hier ?', 'Bilan de ma consommation'];
 }
 
@@ -107,7 +109,7 @@ class HorizontalLinearStepper extends React.Component {
             const stepProps = {};
             const labelProps = {};
             if (this.isStepOptional(index)) {
-              labelProps.optional = <Typography variant="caption">Optional</Typography>;
+              labelProps.optional = <Typography variant="caption"><FormattedMessage id="Optional" /></Typography>;
             }
             if (this.isStepSkipped(index)) {
               stepProps.completed = false;
@@ -123,10 +125,10 @@ class HorizontalLinearStepper extends React.Component {
           {activeStep === this.steps.length ? (
             <div>
               <Typography className={this.classes.instructions}>
-                All steps completed - you&apos;re finished
+                <FormattedMessage id="Finished" />
               </Typography>
               <Button onClick={this.handleReset} className={this.classes.button}>
-                Reset
+                <FormattedMessage id="Reset" />
               </Button>
             </div>
           ) : (
@@ -134,7 +136,7 @@ class HorizontalLinearStepper extends React.Component {
               <div className="stepper-buttons-container">
                 <div className="stepper-buttons-start">
                   <Button disabled={activeStep === 0} onClick={this.handleBack} className={this.classes.button}>
-                    Back
+                    <FormattedMessage id="Back" />
                   </Button>
                 </div>
                 {this.isStepOptional(activeStep) && (
@@ -145,7 +147,7 @@ class HorizontalLinearStepper extends React.Component {
                       onClick={this.handleSkip}
                       className={this.classes.button}
                     >
-                      Skip
+                      <FormattedMessage id="Skip" />
                     </Button>
                   </div>
                 )}
@@ -157,7 +159,7 @@ class HorizontalLinearStepper extends React.Component {
                     className={this.classes.button}
                     disabled={isNextDisabled}
                   >
-                    {activeStep === this.steps.length - 1 ? 'Finish' : 'Next'}
+                    {activeStep === this.steps.length - 1 ? <FormattedMessage id="Finish" /> : <FormattedMessage id="Next" />}
                   </Button>
                 </div>
               </div>

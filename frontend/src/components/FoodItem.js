@@ -1,10 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import { Typography } from '@material-ui/core';
 import Food from '../models/Food';
 import FoodPictures from './FoodPictures';
-import QuantitySlider from './QuantitySlider';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,16 +23,11 @@ const FoodItem = ({ item }) => {
 
   return (
     <div className={classes.root}>
+      <Typography gutterBottom variant="h5" component="h3" key={item.name}>
+        {item.name}
+      </Typography>
       <Paper className={classes.paper}>
-        <Grid container spacing={3}>
-          <Grid item xs={9}>
-            {item.name}
-            <FoodPictures item={item} />
-          </Grid>
-          <Grid item xs={3}>
-            <QuantitySlider item={item} />
-          </Grid>
-        </Grid>
+        <FoodPictures item={item} />
       </Paper>
     </div>
   );
