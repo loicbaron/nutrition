@@ -16,9 +16,9 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary,
   },
 }));
-const PersonDetails = ({ handlePersonDetails }) => {
+const PersonDetails = ({ handlePersonDetails, age, selectAge }) => {
   const classes = useStyles();
-  const [selectedValue, setSelectedValue] = React.useState('');
+  // const [selectedValue, setSelectedValue] = React.useState('');
   const ChildLabel = () => (
     <div className="flex-center-content">
       Enfant&nbsp;<ChildCareIcon />
@@ -30,14 +30,15 @@ const PersonDetails = ({ handlePersonDetails }) => {
     </div>
   );
   const handleChange = (event) => {
-    setSelectedValue(event.target.value);
+    // setSelectedValue(event.target.value);
+    selectAge(event.target.value);
     handlePersonDetails(event.target.value);
   };
   return (
     <div className={classes.root}>
       <Grid className="flex-center-container flex-center-cell" container spacing={3}>
         <FormControl component="fieldset" className="full-width">
-          <RadioGroup aria-label="position" name="position" value={selectedValue} onChange={handleChange} row>
+          <RadioGroup aria-label="position" name="position" value={age} onChange={handleChange} row>
             <Grid className="flex-center-cell" item xs={6}>
               <FormControlLabel
                 value="child"
@@ -63,6 +64,12 @@ const PersonDetails = ({ handlePersonDetails }) => {
 
 PersonDetails.propTypes = {
   handlePersonDetails: PropTypes.func.isRequired,
+  age: PropTypes.string,
+  selectAge: PropTypes.func.isRequired,
 };
+
+PersonDetails.defaultProps = {
+  age: ''
+}
 
 export default PersonDetails;

@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import PersonDetails from './PersonDetails';
 import CategoryListContainer from '../containers/CategoryListContainer';
 import './HorizontalLinearStepper.css';
+import PersonDetailsContainer from '../containers/PersonDetailsContainer';
 
 const styles = theme => ({
   root: {
@@ -43,7 +44,7 @@ class HorizontalLinearStepper extends React.Component {
   getStepContent(step) {
     switch (step) {
       case 0:
-        return <PersonDetails handlePersonDetails={this.setNextActive} />;
+        return <PersonDetailsContainer handlePersonDetails={this.setNextActive} />;
       case 1:
         return <CategoryListContainer />;
       case 2:
