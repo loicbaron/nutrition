@@ -45,11 +45,11 @@ function valueLabelFormat(value) {
   return marks[marks.findIndex(mark => mark.value === value)].label;
 }
 const QuantitySlider = (props) => {
-  const { keys } = props;
+  const { keys, item, onSelect, currentQuantity } = props;
   const myMarks = marks.filter((mark) => keys.includes(mark.label));
   return (
   <Slider
-    defaultValue={0}
+    value={currentQuantity}
     getAriaValueText={valuetext}
     valueLabelFormat={valueLabelFormat}
     aria-labelledby="discrete-slider"
@@ -58,16 +58,20 @@ const QuantitySlider = (props) => {
     marks={myMarks}
     min={0}
     max={myMarks.length - 1}
+    onChangeCommitted={(ev, val) => onSelect(item.id, val)}
   />);
 };
 
 QuantitySlider.propTypes = {
   item: Food.shape.isRequired,
   keys: PropTypes.array,
+  onSelect: PropTypes.func.isRequired,
+  currentQuantity: PropTypes.number,
 };
 
 QuantitySlider.defaultProps = {
   keys: [],
+  currentQuantity: 0,
 }
 
 export default QuantitySlider;

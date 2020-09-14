@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Grid } from '@material-ui/core';
 import Food from '../models/Food';
 import QuantitySlider from './QuantitySlider';
@@ -15,7 +16,7 @@ const FoodImage = (k, v) => {
   );
 };
 
-const FoodPictures = ({ item }) => {
+const FoodPictures = ({ item, addItemQuantity, consumption }) => {
   const img = JSON.parse(item.images).adult;
   const sortedImages =  Object.keys(img).sort().reduce((r, k) => (r[k] = img[k], r), {});
   let images = [<Grid item xs={1} key={'0'}> &nbsp; </Grid>];
@@ -30,6 +31,7 @@ const FoodPictures = ({ item }) => {
       images.push(<Grid item xs={1} key={k}> &nbsp; </Grid>);
     }
   }
+  const currentQuantity = consumption[item.id] ? consumption[item.id] : 0;
   return (
     <div>
       <Grid container spacing={2}>
@@ -39,7 +41,7 @@ const FoodPictures = ({ item }) => {
           </Grid>
           <Grid container justify="space-evenly">
             <Grid item xs={10}>
-              <QuantitySlider item={item} keys={keys} />
+              <QuantitySlider item={item} keys={keys} onSelect={addItemQuantity} currentQuantity={currentQuantity} />
             </Grid>
           </Grid>
         </Grid>
@@ -50,6 +52,8 @@ const FoodPictures = ({ item }) => {
 
 FoodPictures.propTypes = {
   item: Food.shape.isRequired,
+  consumption: PropTypes.object.isRequired,
+  addItemQuantity: PropTypes.func.isRequired,
 };
 
 export default FoodPictures;

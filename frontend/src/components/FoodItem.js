@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
 import Food from '../models/Food';
-import FoodPictures from './FoodPictures';
+import FoodPicturesContainer from '../containers/FoodPicturesContainer';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,7 +27,7 @@ const FoodItem = ({ item }) => {
         {item.name}
       </Typography>
       <Paper className={classes.paper}>
-        <FoodPictures item={item} />
+        <FoodPicturesContainer item={item} />
       </Paper>
     </div>
   );

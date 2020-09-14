@@ -4,7 +4,7 @@ import { CircularProgress } from '@material-ui/core';
 import CategoryList from '../components/CategoryList';
 import fetchService from '../services/fetchService';
 import Category from '../models/Category';
-import './Home.css';
+import '../components/Home.css';
 
 class CategoryListContainer extends Component {
   constructor(props) {

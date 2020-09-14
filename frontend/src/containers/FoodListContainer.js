@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { CircularProgress } from '@material-ui/core';
 import fetchService from '../services/fetchService';
 import Food from '../models/Food';
-import FoodList from './FoodList';
+import FoodList from '../components/FoodList';
 
 class FoodListContainer extends Component {
   constructor(props) {

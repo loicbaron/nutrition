@@ -6,10 +6,10 @@ import StepLabel from '@material-ui/core/StepLabel';
 import { Paper } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import PersonDetails from './PersonDetails';
 import CategoryListContainer from '../containers/CategoryListContainer';
 import './HorizontalLinearStepper.css';
 import PersonDetailsContainer from '../containers/PersonDetailsContainer';
+import ConsumptionContainer from '../containers/ConsumptionContainer';
 
 const styles = theme => ({
   root: {
@@ -48,7 +48,7 @@ class HorizontalLinearStepper extends React.Component {
       case 1:
         return <CategoryListContainer />;
       case 2:
-        return 'Bilan de ma consommation...';
+        return <ConsumptionContainer />;
       default:
         return 'Unknown step';
     }
