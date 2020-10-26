@@ -4,8 +4,8 @@ FROM php:7.4-fpm
 WORKDIR /var/www/html
 
 # Arguments defined in docker-compose.yml
-ARG user
-ARG uid
+ARG user=www-data
+ARG uid=1000
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -40,11 +40,13 @@ RUN mkdir -p /home/$user/.composer && \
 RUN usermod -aG sudo $user
 
 # Init Laravel project
-RUN composer create-project --prefer-dist laravel/laravel nutrition
+RUN composer create-project --prefer-dist laravel/laravel="6.*" nutrition
 
 # Copy code with directory permissions
 COPY --chown=${user}:www-data . /var/www/html/nutrition/
 RUN chown -R ${user}:www-data /var/www/html
+
+RUN cd /var/www/html/nutrition && php artisan --version
 
 USER $user
 

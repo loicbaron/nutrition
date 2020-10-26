@@ -1,7 +1,17 @@
-version: '3'
+version: "3"
 services:
+  # # React Frontend
+  # gppa_frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   container_name: gppa_frontend
+  #   restart: unless-stopped
+  #   tty: true
+  #   ports:
+  #     - "3000:3000"
 
-  # PHP Service
+  # PHP Backend Service
   gppa_php:
     build:
       args:
@@ -17,7 +27,7 @@ services:
       SERVICE_TAGS: dev
       APP_NAME: gppa
       APP_ENV: dev
-      APP_DEBUG: 'true'
+      APP_DEBUG: "true"
       APP_URL: http://localhost
       LOG_CHANNEL: stack
       DB_CONNECTION: mysql
@@ -66,7 +76,7 @@ services:
       MYSQL_ROOT_PASSWORD: gppa
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
-    volumes: 
+    volumes:
       - dbdata:/var/lib/mysql
     networks:
       - app-network
@@ -78,7 +88,7 @@ networks:
 
 # Docker Volumes
 volumes:
-    app-volume:
-      driver: local
-    dbdata:
-      driver: local
+  app-volume:
+    driver: local
+  dbdata:
+    driver: local
