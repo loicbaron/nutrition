@@ -8,7 +8,9 @@ export const anyNumberOfChildren = PropTypes.oneOfType([
 ]);
 
 export const reactRouterMatch = PropTypes.shape({
-  params: PropTypes.object.isRequired,
+  params: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }),
   isExact: PropTypes.bool.isRequired,
   path: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,

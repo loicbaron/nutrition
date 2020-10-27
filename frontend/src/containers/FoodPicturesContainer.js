@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import FoodPictures from '../components/FoodPictures';
-import { addItemQuantity, removeItemQuantity, resetConsumption } from "../store/Consumption/consumptionActions";
+import { addItemQuantity, removeItemQuantity, resetConsumption } from '../store/Consumption/consumptionActions';
 
 const mapStateToProps = state => ({
   consumption: state.consumption,
@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addItemQuantity: (itemId, quantity) => dispatch(addItemQuantity(itemId, quantity)),
-  removeItemQuantity: (itemId) => dispatch(removeItemQuantity(itemId)),
+  removeItemQuantity: itemId => dispatch(removeItemQuantity(itemId)),
   resetConsumption: () => dispatch(resetConsumption()),
 });
 

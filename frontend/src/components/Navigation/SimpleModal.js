@@ -5,9 +5,9 @@ import Modal from '@material-ui/core/Modal';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
+import { Typography } from '@material-ui/core';
 import { anyNumberOfChildren } from '../miscellaneousProps';
 import Clickable from './Clickable';
-import { Typography } from '@material-ui/core';
 
 function getModalStyle() {
   const top = 50;
@@ -20,7 +20,7 @@ function getModalStyle() {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     position: 'absolute',
     width: '70%',
@@ -52,13 +52,13 @@ export default function SimpleModal({ children, title }) {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <Typography variant="h2" className={classes.justified}>
-      { 
-        title ?
-        <div id="simple-modal-title">{title}</div>
-        : <React.Fragment />
+        {
+        title
+          ? <div id="simple-modal-title">{title}</div>
+          : <React.Fragment />
       }
         <IconButton aria-label="close" className={classes.closeButton} onClick={handleClose}>
-            <CloseIcon />
+          <CloseIcon />
         </IconButton>
       </Typography>
       <p id="simple-modal-description">
@@ -86,7 +86,7 @@ export default function SimpleModal({ children, title }) {
 
 SimpleModal.propTypes = {
   children: anyNumberOfChildren.isRequired,
-  title: PropTypes.string
+  title: PropTypes.string,
 };
 
 SimpleModal.defaultProps = {

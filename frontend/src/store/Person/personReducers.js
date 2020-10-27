@@ -1,6 +1,6 @@
 import { AGE_SELECTED, AGE_RESETED } from './personActions';
 
-export function personAge(state = '', action) { // NOSONAR
+function personAge(state = '', action) { // NOSONAR
   switch (action.type) {
     case AGE_SELECTED:
       return action.payload.age;
@@ -10,3 +10,4 @@ export function personAge(state = '', action) { // NOSONAR
       return state;
   }
 }
+export default personAge;

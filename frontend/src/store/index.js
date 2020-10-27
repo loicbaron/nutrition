@@ -1,13 +1,13 @@
 import { createStore, combineReducers } from 'redux';
-import { personAge } from './Person/personReducers';
-import { consumption } from "./Consumption/consumptionReducers";
+import personAge from './Person/personReducers';
+import consumption from './Consumption/consumptionReducers';
 import { foodByCategory, selectedCategory } from './Food/FoodReducers';
 
 const combinedReducers = combineReducers({
   personAge,
   consumption,
   foodByCategory,
-  selectedCategory
+  selectedCategory,
 });
 
 /* eslint-disable no-underscore-dangle */

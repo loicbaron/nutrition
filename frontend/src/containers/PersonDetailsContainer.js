@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  selectAge: (age) => dispatch(selectAge(age)),
+  selectAge: age => dispatch(selectAge(age)),
   resetAge: () => dispatch(resetAge()),
 });
 

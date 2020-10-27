@@ -9,4 +9,3 @@ export const selectAge = age => ({
 export const resetAge = () => ({
   type: AGE_RESETED,
 });
-

@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ChildCareIcon from '@material-ui/icons/ChildCare';
 import FaceIcon from '@material-ui/icons/Face';
-import { Grid, Radio, FormControl, RadioGroup, FormControlLabel } from '@material-ui/core';
+import {
+  Grid, Radio, FormControl, RadioGroup, FormControlLabel,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import './PersonDetails.css';
 
@@ -69,7 +71,7 @@ PersonDetails.propTypes = {
 };
 
 PersonDetails.defaultProps = {
-  age: ''
-}
+  age: '',
+};
 
 export default PersonDetails;

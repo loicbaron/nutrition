@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Slider } from '@material-ui/core';
 import Food from '../models/Food';
 
-let marks = [
+const marks = [
   {
     value: 0,
     label: '0',
@@ -45,26 +45,29 @@ function valueLabelFormat(value) {
   return marks[marks.findIndex(mark => mark.value === value)].label;
 }
 const QuantitySlider = (props) => {
-  const { keys, item, onSelect, currentQuantity } = props;
-  const myMarks = marks.filter((mark) => keys.includes(mark.label));
+  const {
+    keys, item, onSelect, currentQuantity,
+  } = props;
+  const myMarks = marks.filter(mark => keys.includes(mark.label));
   return (
-  <Slider
-    value={currentQuantity}
-    getAriaValueText={valuetext}
-    valueLabelFormat={valueLabelFormat}
-    aria-labelledby="discrete-slider"
-    valueLabelDisplay="auto"
-    step={1}
-    marks={myMarks}
-    min={0}
-    max={myMarks.length - 1}
-    onChangeCommitted={(ev, val) => onSelect(item.id, val)}
-  />);
+    <Slider
+      value={currentQuantity}
+      getAriaValueText={valuetext}
+      valueLabelFormat={valueLabelFormat}
+      aria-labelledby="discrete-slider"
+      valueLabelDisplay="auto"
+      step={1}
+      marks={myMarks}
+      min={0}
+      max={myMarks.length - 1}
+      onChangeCommitted={(ev, val) => onSelect(item.id, val)}
+    />
+  );
 };
 
 QuantitySlider.propTypes = {
   item: Food.shape.isRequired,
-  keys: PropTypes.array,
+  keys: PropTypes.arrayOf(PropTypes.string),
   onSelect: PropTypes.func.isRequired,
   currentQuantity: PropTypes.number,
 };
@@ -72,6 +75,6 @@ QuantitySlider.propTypes = {
 QuantitySlider.defaultProps = {
   keys: [],
   currentQuantity: 0,
-}
+};
 
 export default QuantitySlider;

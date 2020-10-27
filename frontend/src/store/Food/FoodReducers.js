@@ -2,15 +2,15 @@ import {
   SELECT_CATEGORY,
   INVALIDATE_CATEGORY,
   REQUEST_FOOD,
-  RECEIVE_FOOD
-} from './FoodActions'
+  RECEIVE_FOOD,
+} from './FoodActions';
 
 export function selectedCategory(state = '', action) {
   switch (action.type) {
     case SELECT_CATEGORY:
-      return action.category
+      return action.category;
     default:
-      return state
+      return state;
   }
 }
 
@@ -18,29 +18,29 @@ function food(
   state = {
     isFetching: false,
     didInvalidate: false,
-    items: []
+    items: [],
   },
-  action
+  action,
 ) {
   switch (action.type) {
     case INVALIDATE_CATEGORY:
       return Object.assign({}, state, {
-        didInvalidate: true
-      })
+        didInvalidate: true,
+      });
     case REQUEST_FOOD:
       return Object.assign({}, state, {
         isFetching: true,
-        didInvalidate: false
-      })
+        didInvalidate: false,
+      });
     case RECEIVE_FOOD:
       return Object.assign({}, state, {
         isFetching: false,
         didInvalidate: false,
         items: action.food,
-        lastUpdated: action.receivedAt
-      })
+        lastUpdated: action.receivedAt,
+      });
     default:
-      return state
+      return state;
   }
 }
 
@@ -50,9 +50,9 @@ export function foodByCategory(state = {}, action) {
     case RECEIVE_FOOD:
     case REQUEST_FOOD:
       return Object.assign({}, state, {
-        [action.category]: food(state[action.category], action)
-      })
+        [action.category]: food(state[action.category], action),
+      });
     default:
-      return state
+      return state;
   }
 }
