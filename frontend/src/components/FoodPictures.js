@@ -7,29 +7,32 @@ import SimpleModal from './Navigation/SimpleModal';
 import config from '../configs/config';
 import Consumption from '../models/Consumption';
 
-const FoodImage = (k, v) => (
-  <Grid item xs={1} key={v}>
-    <SimpleModal title={k}>
-      <img src={`${config.photos}/adult/${v}`} alt={v} width="100%" />
-    </SimpleModal>
-  </Grid>
-);
+const FoodImage = (key, filename) => {
+  if (filename !== null) {
+    return (
+      <Grid item xs={1} key={`image_${key}`}>
+        <SimpleModal title={key}>
+          <img src={`${config.photos}/adult/${filename}`} alt={filename} width="100%" />
+        </SimpleModal>
+      </Grid>
+    );
+  }
+  return (<Grid item xs={1} key={`image_${key}`}> &nbsp; </Grid>);
+};
 
 const FoodPictures = ({ item, addItemQuantity, consumption }) => {
   const img = JSON.parse(item.images).adult;
-  const sortedImages = Object.keys(img).sort().reduce((r, k) => (r[k] = img[k], r), {});
-  const images = [<Grid item xs={1} key="0"> &nbsp; </Grid>];
-  const keys = ['0'];
-  const letters = [<Grid item xs={1} key="0">0</Grid>];
-  for (const [k, v] of Object.entries(sortedImages)) {
-    keys.push(k);
-    letters.push(<Grid item xs={1} key={k}>{k}</Grid>);
-    if (v !== null) {
-      images.push(FoodImage(k, v));
-    } else {
-      images.push(<Grid item xs={1} key={k}> &nbsp; </Grid>);
-    }
-  }
+  const sortedLetters = Object.keys(img).sort();
+  const sortedImages = {};
+  sortedLetters.map((letter) => {
+    sortedImages[letter] = img[letter]; return img[letter];
+  });
+  const images = [<Grid item xs={1} key="image_0"> &nbsp; </Grid>];
+  const letters = [];
+  sortedLetters.forEach((letter) => {
+    letters.push(<Grid item xs={1} key={letter}>{letter}</Grid>);
+    images.push(FoodImage(letter, sortedImages[letter]));
+  });
   const currentQuantity = consumption[item.id] ? consumption[item.id] : 0;
   return (
     <div>
@@ -42,7 +45,7 @@ const FoodPictures = ({ item, addItemQuantity, consumption }) => {
             <Grid item xs={10}>
               <QuantitySlider
                 item={item}
-                keys={keys}
+                keys={sortedLetters}
                 onSelect={addItemQuantity}
                 currentQuantity={currentQuantity}
               />
