@@ -51,8 +51,14 @@ class Food extends Model
         'Vitamine_B9_microg',
         'Vitamine_B12_microg',
         'Vitamine_C_mg',
-        'portions',
+        'old_portions',
         'images',
     ];
-
+    /**
+     * Get the portions for the food item.
+     */
+    public function portions()
+    {
+        return $this->hasMany('App\Portion');
+    }
 }
