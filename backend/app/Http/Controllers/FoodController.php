@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Food;
+use App\Portion;
 
 class FoodController extends Controller
 {
@@ -31,6 +32,74 @@ class FoodController extends Controller
         return view('admin', ['foods' => Food::all()]);
     }
     /**
+     * Sort portions by letter.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sortPortions()
+    {
+        $allFood = Food::all();
+        $allFood->each(function($item) {
+            $portions = json_decode($item->old_portions, true);
+            foreach($portions as $key => &$unsortedPortions) {
+                ksort($unsortedPortions);
+            }
+            $item->old_portions = json_encode($portions);
+            $item->save();
+        });
+        return "sorted";
+    }
+    /**
+     * Sort images by key (letter of portion).
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sortImages()
+    {
+        $allFood = Food::all();
+        $allFood->each(function($item) {
+            $images = json_decode($item->images, true);
+            foreach($images as $key => &$oldImages){
+                ksort($oldImages);
+            }
+            $item->images = json_encode($images);
+            $item->save();
+        });
+        return "sorted";
+    }
+
+    /**
+     * Display a JSON of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePortions()
+    {
+        $results = array();
+        $allFood = Food::all();
+        $allFood->each(function($item) {
+            $portions = json_decode($item->old_portions, true);
+            foreach($portions as $key => $oldPortions) {
+                foreach(array_keys($oldPortions) as $k => $letter) {
+                    if ($letter != "type") {
+                        // print("new portion = ".json_encode($newPortion));
+                        $results[] = Portion::create([
+                            "type" => $oldPortions["type"],
+                            "letter" => $letter,
+                            "weight" => (int)$oldPortions[$letter],
+                            "position" => (int)$k+1,
+                            "image" => json_decode($item->images, true)[$oldPortions["type"]][$letter],
+                            "food_id" => (int)$item->id,
+                        ]);
+                    }
+                }
+            }
+            $item->portions()->saveMany($results);
+        });
+        return json_encode($results);
+    }
+
+    /**
      * Display a JSON of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -38,7 +107,7 @@ class FoodController extends Controller
     public function json()
     {
         //
-        return view('json_foods', ['foods' => Food::all()]);
+        return view('json_foods', ['foods' => Food::with('portions')->all()]);
     }
     /**
      * Synchronize the images files with the food stored in DB. 
@@ -52,7 +121,7 @@ class FoodController extends Controller
         $max = 0;
         $results = Array();
         $food = Food::find($id);
-        $portions = json_decode($food->portions, true);
+        $portions = json_decode($food->old_portions, true);
         foreach($portions as $key => $p){
             $result = array_fill_keys(array_keys($p), null);
             unset($result["type"]);
@@ -101,7 +170,7 @@ class FoodController extends Controller
     public function show($id)
     {
         //
-        return view('food', ['food' => Food::findOrFail($id)]);
+        return view('food', ['food' => FoodFood::with('portions')->findOrFail($id)]);
     }
 
     /**
