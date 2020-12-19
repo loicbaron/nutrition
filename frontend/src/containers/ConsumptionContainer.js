@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import MyConsumption from '../components/MyConsumption';
 import { resetAge } from '../store/Person/personActions';
-import { resetConsumption } from '../store/Consumption/consumptionActions';
+import { resetAllPortions } from '../store/Consumption/consumptionActions';
 
 const mapStateToProps = state => ({
   age: state.personAge,
@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   resetAge: () => dispatch(resetAge()),
-  resetConsumption: () => dispatch(resetConsumption()),
+  resetAllPortions: () => dispatch(resetAllPortions()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyConsumption);

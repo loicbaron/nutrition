@@ -1,15 +1,16 @@
 import { connect } from 'react-redux';
 import FoodPictures from '../components/FoodPictures';
-import { addItemQuantity, removeItemQuantity, resetConsumption } from '../store/Consumption/consumptionActions';
+import { selectPortion, resetPortion, resetAllPortions } from '../store/Consumption/consumptionActions';
 
 const mapStateToProps = state => ({
   consumption: state.consumption,
+  age: state.personAge,
 });
 
 const mapDispatchToProps = dispatch => ({
-  addItemQuantity: (itemId, quantity) => dispatch(addItemQuantity(itemId, quantity)),
-  removeItemQuantity: itemId => dispatch(removeItemQuantity(itemId)),
-  resetConsumption: () => dispatch(resetConsumption()),
+  selectPortion: (item, position, age) => dispatch(selectPortion(item, position, age)),
+  resetPortion: item => dispatch(resetPortion(item)),
+  resetAllPortions: () => dispatch(resetAllPortions()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FoodPictures);
