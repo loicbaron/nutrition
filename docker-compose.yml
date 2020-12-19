@@ -13,6 +13,8 @@ services:
 
   # PHP Backend Service
   gppa_php:
+    depends_on:
+      - gppa_db
     build:
       args:
         user: www-data
@@ -92,3 +94,5 @@ volumes:
     driver: local
   dbdata:
     driver: local
+# DB Migration once container is running
+# docker-compose exec gppa_php php /var/www/html/nutrition/artisan migrate

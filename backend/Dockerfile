@@ -48,6 +48,11 @@ RUN chown -R ${user}:www-data /var/www/html
 
 RUN cd /var/www/html/nutrition && php artisan --version
 
+# doctrine/dbal is used for SQL Migration (rename column)
+RUN cd /var/www/html/nutrition && composer require doctrine/dbal "^2.12.1"
+# DB Migration once container is running
+# docker-compose exec gppa_php php /var/www/html/nutrition/artisan migrate
+
 USER $user
 
 # Start php-fpm server
