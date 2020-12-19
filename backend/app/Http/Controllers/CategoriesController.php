@@ -18,7 +18,8 @@ class CategoriesController extends Controller
     public function all()
     {
         return json_encode(
-            Food::select('Categorie AS name', 'Code_categorie AS id')
+            Food::with('portions')
+            ->select('Categorie AS name', 'Code_categorie AS id')
             ->groupBy('Code_categorie', 'Categorie')
             ->get()
         );
@@ -33,7 +34,8 @@ class CategoriesController extends Controller
     public function one($id)
     {
         return json_encode(
-            Food::select('Categorie AS name', 'Code_categorie AS id')
+            Food::with('portions')
+            ->select('Categorie AS name', 'Code_categorie AS id')
             ->where('Code_categorie', $id)
             ->groupBy('Code_categorie', 'Categorie')
             ->get()
@@ -49,7 +51,8 @@ class CategoriesController extends Controller
     public function food($id)
     {
         return json_encode(
-            Food::where('Code_categorie', $id)
+            Food::with('portions')
+            ->where('Code_categorie', $id)
             ->get()
         );;
     }
