@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
 import Food from '../models/Food';
 import FoodPicturesContainer from '../containers/FoodPicturesContainer';
+import './FoodItem.css';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,7 +24,7 @@ const FoodItem = ({ item }) => {
 
   return (
     <div className={classes.root}>
-      <Typography gutterBottom variant="h5" component="h3" key={item.name}>
+      <Typography gutterBottom variant="h6" component="h6" key={item.name} className="food-item-name">
         {item.name}
       </Typography>
       <Paper className={classes.paper}>

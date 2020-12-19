@@ -1,0 +1,3 @@
+.food-item-name::first-letter {
+  text-transform: capitalize;
+}
