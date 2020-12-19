@@ -1,0 +1,9 @@
+.food-category {
+  background-color: #b39ddb;
+  text-align: center;
+  margin-top: 40px !important;
+  padding: 10px;
+}
+.food-category::first-letter {
+  text-transform: capitalize;
+}
