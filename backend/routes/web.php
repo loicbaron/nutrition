@@ -17,6 +17,10 @@ Route::get('json/food', 'FoodController@json');
 
 Route::get('sync/images/{id}', 'FoodController@syncImages');
 
+Route::get('/api/portions', 'FoodController@updatePortions');
+Route::get('/api/portions/sort', 'FoodController@sortPortions');
+Route::get('/api/images/sort', 'FoodController@sortImages');
+
 Route::match(['get', 'options'], '/api/categories', 'CategoriesController@all')->middleware("cors");
 Route::match(['get', 'options'], '/api/categories/{id}', 'CategoriesController@one')->middleware("cors");
 Route::match(['get', 'options'], '/api/categories/{id}/food', 'CategoriesController@food')->middleware("cors");
