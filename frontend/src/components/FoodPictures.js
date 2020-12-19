@@ -20,7 +20,9 @@ const FoodImage = (key, filename) => {
   return (<Grid item xs={1} key={`image_${key}`}> &nbsp; </Grid>);
 };
 
-const FoodPictures = ({ item, addItemQuantity, consumption }) => {
+const FoodPictures = ({
+  item, selectPortion, consumption, age,
+}) => {
   const img = JSON.parse(item.images).adult;
   const sortedLetters = Object.keys(img).sort();
   const sortedImages = {};
@@ -28,31 +30,24 @@ const FoodPictures = ({ item, addItemQuantity, consumption }) => {
     sortedImages[letter] = img[letter]; return img[letter];
   });
   const images = [<Grid item xs={1} key="image_0"> &nbsp; </Grid>];
-  const letters = [];
+  const letters = [<Grid item xs={1} key="letter_0"> &nbsp; </Grid>];
   sortedLetters.forEach((letter) => {
     letters.push(<Grid item xs={1} key={letter}>{letter}</Grid>);
     images.push(FoodImage(letter, sortedImages[letter]));
   });
   const currentQuantity = consumption[item.id] ? consumption[item.id] : 0;
   return (
-    <div>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Grid container justify="space-evenly">
-            { images }
-          </Grid>
-          <Grid container justify="space-evenly">
-            <Grid item xs={10}>
-              <QuantitySlider
-                item={item}
-                keys={sortedLetters}
-                onSelect={addItemQuantity}
-                currentQuantity={currentQuantity}
-              />
-            </Grid>
-          </Grid>
+    <div style={{ width: '100%' }}>
+        <Grid container justify="space-evenly">
+          { images }
         </Grid>
-      </Grid>
+        <Grid container justify="space-evenly">
+            <QuantitySlider
+              keys={sortedLetters}
+              onSelect={position => selectPortion(item, position, age)}
+              currentQuantity={currentQuantity}
+            />
+        </Grid>
     </div>
   );
 };
@@ -60,7 +55,8 @@ const FoodPictures = ({ item, addItemQuantity, consumption }) => {
 FoodPictures.propTypes = {
   item: Food.shape.isRequired,
   consumption: Consumption.shape.isRequired,
-  addItemQuantity: PropTypes.func.isRequired,
+  age: PropTypes.string.isRequired,
+  selectPortion: PropTypes.func.isRequired,
 };
 
 export default FoodPictures;
