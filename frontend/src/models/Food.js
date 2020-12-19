@@ -1,5 +1,6 @@
 
 import PropTypes from 'prop-types';
+import Portion from './Portion';
 
 export default class Food {
   static empty() {
@@ -7,7 +8,7 @@ export default class Food {
       id: 0,
       name: '',
       images: '',
-      portions: '',
+      portions: [],
     });
   }
 
@@ -35,7 +36,7 @@ export default class Food {
     id = 0,
     name = '',
     images = '',
-    portions = '',
+    portions = [],
   }) {
     this.id = id;
     this.name = name;
@@ -48,7 +49,21 @@ export default class Food {
       id: PropTypes.number,
       name: PropTypes.string,
       images: PropTypes.string,
-      portions: PropTypes.string,
+      portions: PropTypes.arrayOf(Portion.shape),
     });
   }
 }
+
+/*
+
+portions: "[{"C": "312", "G": "620", "A": "149", "B": "230", "D": "393", "E": "469", "F": "544", "type": "child"}, {"C": "545", "G": "1140", "A": "241", "B": "393", "D": "697", "E": "845", "F": "992", "type": "adult"}]"
+
+[
+  {
+  position: 1,
+  letter: 'A',
+  type: 'child',
+  weight: 149,
+  }
+]
+*/
