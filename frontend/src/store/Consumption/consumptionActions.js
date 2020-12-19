@@ -1,15 +1,15 @@
-export const ADD_ITEM_QUANTITY = 'ADD_ITEM_QUANTITY';
-export const REMOVE_ITEM_QUANTITY = 'REMOVE_ITEM_QUANTITY';
-export const CONSUMPTION_RESETED = 'CONSUMPTION_RESETED';
+export const SELECT_PORTION = 'SELECT_PORTION';
+export const RESET_PORTION = 'RESET_PORTION';
+export const RESET_ALL_PORTIONS = 'RESET_ALL_PORTIONS';
 
-export const addItemQuantity = (itemId, quantity) => ({
-  type: ADD_ITEM_QUANTITY,
-  payload: { itemId, quantity },
+export const selectPortion = (item, position, age) => ({
+  type: SELECT_PORTION,
+  payload: { item, position, age },
 });
-export const removeItemQuantity = itemId => ({
-  type: REMOVE_ITEM_QUANTITY,
-  payload: { itemId },
+export const resetPortion = item => ({
+  type: RESET_PORTION,
+  payload: { item },
 });
-export const resetConsumption = () => ({
-  type: CONSUMPTION_RESETED,
+export const resetAllPortions = () => ({
+  type: RESET_ALL_PORTIONS,
 });
