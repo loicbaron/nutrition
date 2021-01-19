@@ -7,12 +7,12 @@ import SimpleModal from './Navigation/SimpleModal';
 import config from '../configs/config';
 import Consumption from '../models/Consumption';
 
-const FoodImage = (key, filename) => {
+const FoodImage = (key, age, filename) => {
   if (filename !== null) {
     return (
       <Grid item xs={1} key={`image_${key}`}>
         <SimpleModal title={key}>
-          <img src={`${config.photos}/adult/${filename}`} alt={filename} width="100%" />
+          <img src={`${config.photos}/${age}/${filename}`} alt={filename} width="100%" />
         </SimpleModal>
       </Grid>
     );
@@ -23,17 +23,13 @@ const FoodImage = (key, filename) => {
 const FoodPictures = ({
   item, selectPortion, consumption, age,
 }) => {
-  const img = JSON.parse(item.images).adult;
-  const sortedLetters = Object.keys(img).sort();
-  const sortedImages = {};
-  sortedLetters.map((letter) => {
-    sortedImages[letter] = img[letter]; return img[letter];
-  });
   const images = [<Grid item xs={1} key="image_0"> &nbsp; </Grid>];
   const letters = [<Grid item xs={1} key="letter_0"> &nbsp; </Grid>];
+  const portions = item.portions.filter((p) => p.type === age);
+  const sortedLetters = portions.map(p => p.letter).sort();
   sortedLetters.forEach((letter) => {
     letters.push(<Grid item xs={1} key={letter}>{letter}</Grid>);
-    images.push(FoodImage(letter, sortedImages[letter]));
+    images.push(FoodImage(letter, age, portions.find(p => p.letter === letter).image));
   });
   const currentQuantity = consumption[item.id] ? consumption[item.id] : 0;
   return (
