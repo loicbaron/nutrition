@@ -18,7 +18,7 @@ function consumption(state = initialState, action) {
         selected: {
           ...state.selected,
           [item.id]: {
-            name: item.name,
+            ...item,
             weight,
             position,
           },
@@ -40,12 +40,15 @@ function consumption(state = initialState, action) {
       };
     case ADD_SELECTED_PORTIONS:
       const portions = {};
-      for (const [id, item] of Object.entries(state.selected)) {
+      for (let [id, item] of Object.entries(state.selected)) {
         const currentWeight = state.result[id] ? state.result[id].weight : 0;
         item.weight = item.weight ? item.weight : 0;
         const totalWeight = currentWeight + item.weight;
         if (totalWeight) {
-          portions[id] = {name: item.name, weight: currentWeight + item.weight};
+          for (const [key, value] of Object.entries(item.composition)) {
+            item.composition[key] = Math.round(value * totalWeight) / 100;
+          }
+          portions[id] = {...item, weight: totalWeight};
         }
       }
       return {
