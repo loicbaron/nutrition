@@ -31,7 +31,7 @@ const FoodPictures = ({
     letters.push(<Grid item xs={1} key={letter}>{letter}</Grid>);
     images.push(FoodImage(letter, age, portions.find(p => p.letter === letter).image));
   });
-  const currentQuantity = consumption[item.id] ? consumption[item.id] : 0;
+  const currentQuantity = consumption.selected[item.id] ? consumption.selected[item.id].position : 0;
   return (
     <div style={{ width: '100%' }}>
         <Grid container justify="space-evenly">
