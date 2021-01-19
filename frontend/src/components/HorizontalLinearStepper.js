@@ -26,7 +26,11 @@ const styles = theme => ({
 
 function getSteps() {
   // TODO: replace hardcoded by translations .json
-  return ['Qui êtes vous ?', 'Qu\'avez-vous mangé hier ?', 'Bilan de ma consommation'];
+  return [
+    "step.1",
+    "step.2",
+    "step.3"
+  ];
 }
 
 class HorizontalLinearStepper extends React.Component {
@@ -117,7 +121,9 @@ class HorizontalLinearStepper extends React.Component {
             }
             return (
               <Step key={label} {...stepProps}>
-                <StepLabel {...labelProps}>{label}</StepLabel>
+                <StepLabel {...labelProps}>
+                  <FormattedMessage id={label} />
+                </StepLabel>
               </Step>
             );
           })}

@@ -9,6 +9,9 @@
   "Skip": "Passer",
   "Finished": "Toutes les étapes sont terminées",
   "Optional": "Optionnel",
+  "step.1": "Qui êtes vous ?", 
+  "step.2": "Qu'avez-vous mangé hier ?", 
+  "step.3": "Bilan de ma consommation",
   "add.items.title": "Ajouter la sélection",
   "add.items.text": "Les portions seront ajoutées à votre bilan de consommation."
 }
