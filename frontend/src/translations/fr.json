@@ -1,12 +1,14 @@
 {
   "Header.title": "Alimentation des Camerounais",
   "Header.subtitle": "J’évalue mon alimentation",
-  "Error.backend": "Failed to fetch data from Backend",
+  "Error.backend": "Impossible d'obtenir des données du Backend",
   "Back": "Retour",
   "Next": "Suivant",
   "Finish": "Terminer",
   "Reset": "Recommencer",
   "Skip": "Passer",
   "Finished": "Toutes les étapes sont terminées",
-  "Optional": "Optionnel"
+  "Optional": "Optionnel",
+  "add.items.title": "Ajouter la sélection",
+  "add.items.text": "Les portions sélectionnées seront ajoutées à votre bilan de consommation."
 }

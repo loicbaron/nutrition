@@ -1,12 +1,14 @@
 {
-  "Header.title": "My App",
-  "Header.subtitle": "Welcome to My App",
+  "Header.title": "Food in Cameroun",
+  "Header.subtitle": "Evaluate your food intake",
   "Error.backend": "Failed to fetch data from Backend",
   "Back": "Back",
   "Next": "Next",
   "Finish": "Finish",
   "Reset": "Reset",
   "Skip": "Skip",
-  "Finished": "All steps completed - you&apos;re finished",
-  "Optional": "Optional"
+  "Finished": "All steps completed",
+  "Optional": "Optional",
+  "add.items.title": "Add items",
+  "add.items.text": "Selected items will be added to your consumption report."
 }
