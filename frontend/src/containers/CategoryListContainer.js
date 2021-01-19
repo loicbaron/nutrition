@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import { CircularProgress, Fab } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
 
+import TooltipControlled from '../components/Navigation/TooltipControlled';
 import CategoryList from '../components/CategoryList';
 import fetchService from '../services/fetchService';
 import Category from '../models/Category';
@@ -20,7 +21,6 @@ const styles = theme => ({
     right: theme.spacing(2),
   },
 });
-
 class CategoryListContainer extends Component {
   constructor(props) {
     super(props);
@@ -57,7 +57,8 @@ class CategoryListContainer extends Component {
 
   render() {
     const { categories, isLoading, error } = this.state;
-    const { classes, resetAllPortions } = this.props;
+    const { classes, resetAllPortions} = this.props;
+    const { formatMessage } = this.props.intl;
     return (
       <div className="home">
         { error ? <div className="error"><FormattedMessage id={error} /></div> : <React.Fragment /> }
@@ -67,9 +68,11 @@ class CategoryListContainer extends Component {
               ? <div className="center"><CircularProgress /></div>
               : (
                 <div><CategoryList className="full-width" categories={categories} />
-                  <Fab color="secondary" aria-label="add" className={classes.fabButton} onClick={resetAllPortions}>
-                    <AddIcon />
-                  </Fab>
+                  <TooltipControlled title={formatMessage({id: "add.items.title"})} text={formatMessage({id: "add.items.text"})}>
+                    <Fab color="secondary" aria-label="add" className={classes.fabButton} onClick={resetAllPortions}>
+                        <AddIcon />
+                    </Fab>
+                  </TooltipControlled>
                 </div>
               )
             }
@@ -89,4 +92,4 @@ const mapDispatchToProps = dispatch => ({
   resetAllPortions: () => dispatch(resetAllPortions()),
 });
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(CategoryListContainer));
+export default connect(null, mapDispatchToProps)(withStyles(styles)(injectIntl(CategoryListContainer)));
