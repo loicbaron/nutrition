@@ -11,7 +11,7 @@ import CategoryList from '../components/CategoryList';
 import fetchService from '../services/fetchService';
 import Category from '../models/Category';
 import '../components/Home.css';
-import { resetAllPortions } from '../store/Consumption/consumptionActions';
+import { resetAllPortions, addSelectedPortions } from '../store/Consumption/consumptionActions';
 
 
 const styles = theme => ({
@@ -57,7 +57,7 @@ class CategoryListContainer extends Component {
 
   render() {
     const { categories, isLoading, error } = this.state;
-    const { classes, resetAllPortions} = this.props;
+    const { classes, resetAllPortions, addSelectedPortions } = this.props;
     const { formatMessage } = this.props.intl;
     return (
       <div className="home">
@@ -69,7 +69,8 @@ class CategoryListContainer extends Component {
               : (
                 <div><CategoryList className="full-width" categories={categories} />
                   <TooltipControlled title={formatMessage({id: "add.items.title"})} text={formatMessage({id: "add.items.text"})}>
-                    <Fab color="secondary" aria-label="add" className={classes.fabButton} onClick={resetAllPortions}>
+                    <Fab color="secondary" aria-label="add" className={classes.fabButton} 
+                      onClick={() => {addSelectedPortions();resetAllPortions();}}>
                         <AddIcon />
                     </Fab>
                   </TooltipControlled>
@@ -86,10 +87,12 @@ class CategoryListContainer extends Component {
 CategoryListContainer.propTypes = {
   classes: PropTypes.shape({ fabButton: PropTypes.string.isRequired }).isRequired,
   resetAllPortions: PropTypes.func.isRequired,
+  addSelectedPortions: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
   resetAllPortions: () => dispatch(resetAllPortions()),
+  addSelectedPortions: () => dispatch(addSelectedPortions()),
 });
 
 export default connect(null, mapDispatchToProps)(withStyles(styles)(injectIntl(CategoryListContainer)));
