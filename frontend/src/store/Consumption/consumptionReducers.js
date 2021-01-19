@@ -1,4 +1,4 @@
-import { SELECT_PORTION, RESET_PORTION, RESET_ALL_PORTIONS } from './consumptionActions';
+import { SELECT_PORTION, RESET_PORTION, RESET_ALL_SELECTED_PORTIONS } from './consumptionActions';
 
 const result = [];
 
@@ -25,6 +25,7 @@ function consumption(state = {}, action) {
       return {
         ...state,
         [item.id]: position,
+        result: result,
       };
     case RESET_PORTION:
       // eslint-disable-next-line no-case-declarations
@@ -32,8 +33,8 @@ function consumption(state = {}, action) {
       // eslint-disable-next-line no-case-declarations
       const { [key]: value, ...withoutKey } = state;
       return withoutKey;
-    case RESET_ALL_PORTIONS:
-      return {};
+    case RESET_ALL_SELECTED_PORTIONS:
+      return { result };
     default:
       return state;
   }
