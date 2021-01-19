@@ -4,8 +4,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { Typography, withStyles } from '@material-ui/core';
 import { anyNumberOfChildren } from '../miscellaneousProps';
 
-export default function TooltipControlled({children, isOpen, title, text}) {
-  const [open, setOpen] = React.useState(isOpen);
+export default function TooltipControlled({children, title, text}) {
+  const [open, setOpen] = React.useState(true);
 
   const handleClose = () => {
     setOpen(false);
@@ -42,12 +42,10 @@ export default function TooltipControlled({children, isOpen, title, text}) {
 
 TooltipControlled.propTypes = {
   children: anyNumberOfChildren.isRequired,
-  isOpen: PropTypes.bool,
   title: PropTypes.string.isRequired,
   text: PropTypes.string,
 };
 
 TooltipControlled.defaultProps = {
-  isOpen: false,
   text: null,
 };
