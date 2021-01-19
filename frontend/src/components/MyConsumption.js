@@ -6,9 +6,9 @@ import Consumption from '../models/Consumption';
 const MyConsumption = ({
   consumption, age, resetAge, resetAllPortions,
 }) => {
-  console.log('consumption', consumption);
+  console.log('consumption.result', consumption.result);
   console.log('age', age);
-  return (<p>Bilan de consommation</p>);
+  return (<p>Bilan de consommation: {JSON.stringify(consumption.result)}</p>);
 };
 
 MyConsumption.propTypes = {
