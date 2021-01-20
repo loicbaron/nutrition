@@ -2,6 +2,10 @@
 import PropTypes from 'prop-types';
 
 export default class Composition {
+  static empty() {
+    return new Composition({});
+  }
+
   static from(
     Energie_kcal,
     Energie_kJ,
