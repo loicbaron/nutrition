@@ -5,39 +5,7 @@ import Portion from './Portion';
 
 export default class Food {
   static empty() {
-    return new Food({
-      id: 0,
-      name: '',
-      Energie_kcal: 0,
-      Energie_kJ: 0,
-      Eau_g: 0,
-      Protéines_g: 0,
-      Lipides_g: 0,
-      Glucides_g: 0,
-      Fibres_g: 0,
-      Cendres_g: 0,
-      Calcium_mg: 0,
-      Fer_mg: 0,
-      Magnesium_mg: 0,
-      Phosphore_mg: 0,
-      Potassium_mg: 0,
-      Sodium_mg: 0,
-      Zinc_mg: 0,
-      Cuivre_mg: 0,
-      Vitamine_A_microg: 0,
-      Retinol_microg: 0,
-      betacarotene_microg: 0,
-      Vitamine_D_microg: 0,
-      Vitamine_E_mg: 0,
-      Vitamine_B1_mg: 0,
-      Vitamine_B2_mg: 0,
-      Vitamine_B3_mg: 0,
-      Vitamine_B6_mg: 0,
-      Vitamine_B9_microg: 0,
-      Vitamine_B12_microg: 0,
-      Vitamine_C_mg: 0,
-      portions: [],
-    });
+    return new Food({});
   }
 
   static from(
