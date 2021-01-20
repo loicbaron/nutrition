@@ -4,7 +4,6 @@ import { resetAge } from '../store/Person/personActions';
 import { resetAllPortions } from '../store/Consumption/consumptionActions';
 
 const mapStateToProps = state => ({
-  age: state.personAge,
   consumption: state.consumption,
 });
 
