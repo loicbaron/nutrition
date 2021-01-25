@@ -34,7 +34,7 @@ const PersonDetails = ({ handlePersonDetails, age, selectAge }) => {
   const handleChange = (event) => {
     // setSelectedValue(event.target.value);
     selectAge(event.target.value);
-    handlePersonDetails(event.target.value);
+    handlePersonDetails(event.target.value.length > 0);
   };
   return (
     <div className={classes.root}>

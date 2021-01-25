@@ -13,5 +13,7 @@
   "step.2": "Qu'avez-vous mangé hier ?", 
   "step.3": "Bilan de ma consommation",
   "add.items.title": "Ajouter la sélection",
-  "add.items.text": "Les portions seront ajoutées à votre bilan de consommation."
+  "add.items.text": "Les portions seront ajoutées à votre bilan de consommation.",
+  "get.report.title": "Obtenir votre bilan",
+  "get.report.text": "Voir votre bilan de consommation"
 }

@@ -13,5 +13,7 @@
   "step.2": "What did you eat yesterday?", 
   "step.3": "Intake report",
   "add.items.title": "Add items",
-  "add.items.text": "Selected items will be added to your consumption report."
+  "add.items.text": "Selected items will be added to your consumption report.",
+  "get.report.title": "Get your report",
+  "get.report.text": "See your consumption report"
 }
