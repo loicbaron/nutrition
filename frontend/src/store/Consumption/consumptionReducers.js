@@ -1,9 +1,11 @@
-import { SELECT_PORTION, RESET_PORTION, RESET_ALL_SELECTED_PORTIONS, ADD_SELECTED_PORTIONS } from './consumptionActions';
+import {
+  SELECT_PORTION, RESET_PORTION, CLEAR_SELECTED_PORTIONS, ADD_TO_CONSUMPTION, RESET_CONSUMPTION,
+} from './consumptionActions';
 
 const initialState = {
   selected: {},
-  result: {}
-}
+  result: {},
+};
 
 function consumption(state = initialState, action) {
   switch (action.type) {
@@ -33,14 +35,14 @@ function consumption(state = initialState, action) {
         ...state,
         selected: withoutKey,
       };
-    case RESET_ALL_SELECTED_PORTIONS:
+    case CLEAR_SELECTED_PORTIONS:
       return {
         ...state,
         selected: {},
       };
-    case ADD_SELECTED_PORTIONS:
+    case ADD_TO_CONSUMPTION:
       const portions = {};
-      for (let [id, item] of Object.entries(state.selected)) {
+      for (const [id, item] of Object.entries(state.selected)) {
         const currentWeight = state.result[id] ? state.result[id].weight : 0;
         item.weight = item.weight ? item.weight : 0;
         const totalWeight = currentWeight + item.weight;
@@ -48,7 +50,7 @@ function consumption(state = initialState, action) {
           for (const [key, value] of Object.entries(item.composition)) {
             item.composition[key] = Math.round(value * totalWeight) / 100;
           }
-          portions[id] = {...item, weight: totalWeight};
+          portions[id] = { ...item, weight: totalWeight };
         }
       }
       return {
@@ -56,8 +58,10 @@ function consumption(state = initialState, action) {
         result: {
           ...state.result,
           ...portions,
-        }
-      }
+        },
+      };
+    case RESET_CONSUMPTION:
+      return initialState;
     default:
       return state;
   }
