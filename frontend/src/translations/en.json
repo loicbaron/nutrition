@@ -15,5 +15,7 @@
   "add.items.title": "Add items",
   "add.items.text": "Selected items will be added to your consumption report.",
   "get.report.title": "Get your report",
-  "get.report.text": "See your consumption report"
+  "get.report.text": "See your consumption report",
+  "daily.intake": "Reference Daily Intake",
+  "daily.intake.link": "https://en.wikipedia.org/wiki/Reference_Daily_Intake"
 }

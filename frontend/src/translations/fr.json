@@ -15,5 +15,7 @@
   "add.items.title": "Ajouter la sélection",
   "add.items.text": "Les portions seront ajoutées à votre bilan de consommation.",
   "get.report.title": "Obtenir votre bilan",
-  "get.report.text": "Voir votre bilan de consommation"
+  "get.report.text": "Voir votre bilan de consommation",
+  "daily.intake": "Apports Journaliers Recommandés",
+  "daily.intake.link": "https://fr.wikipedia.org/wiki/Apports_journaliers_recommand%C3%A9s#AJR_dans_l'Union_europ%C3%A9enne_(Directive_1990/496_remplac%C3%A9e_par_le_R%C3%A8glement_1169/2011)"
 }
