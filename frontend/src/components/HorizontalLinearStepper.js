@@ -12,8 +12,11 @@ import CategoryListContainer from '../containers/CategoryListContainer';
 import './HorizontalLinearStepper.css';
 import PersonDetailsContainer from '../containers/PersonDetailsContainer';
 import ConsumptionContainer from '../containers/ConsumptionContainer';
+import ConsumptionReportContainer from '../containers/ConsumptionReportContainer';
 import Consumption from '../models/Consumption';
 import TooltipControlled from './Navigation/TooltipControlled';
+import { resetAge } from '../store/Person/personActions';
+import { resetConsumption } from '../store/Consumption/consumptionActions';
 
 const styles = theme => ({
   root: {
@@ -31,9 +34,9 @@ const styles = theme => ({
 function getSteps() {
   // TODO: replace hardcoded by translations .json
   return [
-    "step.1",
-    "step.2",
-    "step.3"
+    'step.1',
+    'step.2',
+    'step.3',
   ];
 }
 
@@ -82,6 +85,7 @@ class HorizontalLinearStepper extends React.Component {
   }
 
   setNextActive = value => (this.setState({ isNextDisabled: value === false }));
+
   setTooltipActive = value => (this.setState({ isTooltipActive: value === true }));
 
   isStepSkipped = (step) => {
@@ -125,27 +129,34 @@ class HorizontalLinearStepper extends React.Component {
   };
 
   handleReset = () => {
+    this.props.resetConsumption();
+    this.props.resetAge();
     this.setState({ activeStep: 0 });
   };
 
   render() {
     const { activeStep, isNextDisabled, isTooltipActive } = this.state;
     const { intl } = this.props;
-    let nextButton = <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={this.handleNext}
-                    className={this.classes.button}
-                    disabled={isNextDisabled}
-                  >
-                    { activeStep === this.steps.length - 1 ? <FormattedMessage id="Finish" /> : <FormattedMessage id="Next" /> }
-                  </Button>
+    let nextButton = (
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={this.handleNext}
+        className={this.classes.button}
+        disabled={isNextDisabled}
+      >
+        { activeStep === this.steps.length - 1 ? <FormattedMessage id="Finish" /> : <FormattedMessage id="Next" /> }
+      </Button>
+    );
     if (isTooltipActive) {
-      nextButton = <TooltipControlled
-              title={intl.formatMessage({ id: "get.report.title" })}
-              text={intl.formatMessage({ id: "get.report.text" })}>
-             { nextButton }     
-            </TooltipControlled>;
+      nextButton = (
+        <TooltipControlled
+          title={intl.formatMessage({ id: 'get.report.title' })}
+          text={intl.formatMessage({ id: 'get.report.text' })}
+        >
+          { nextButton }
+        </TooltipControlled>
+      );
     }
     return (
       <div className={this.classes.root}>
@@ -171,12 +182,21 @@ class HorizontalLinearStepper extends React.Component {
         <div>
           {activeStep === this.steps.length ? (
             <div>
-              <Typography className={this.classes.instructions}>
-                <FormattedMessage id="Finished" />
-              </Typography>
-              <Button onClick={this.handleReset} className={this.classes.button}>
-                <FormattedMessage id="Reset" />
-              </Button>
+              <div className="stepper-buttons-container">
+                <div className="stepper-buttons-start">
+                  <Button disabled={activeStep === 0} onClick={this.handleBack} className={this.classes.button}>
+                    <FormattedMessage id="Back" />
+                  </Button>
+                </div>
+                <div className="stepper-buttons-end">
+                  <Button onClick={this.handleReset} className={this.classes.button}>
+                    <FormattedMessage id="Reset" />
+                  </Button>
+                </div>
+              </div>
+              <Paper className="stepper-main">
+                <ConsumptionReportContainer />
+              </Paper>
             </div>
           ) : (
             <div>
@@ -221,4 +241,9 @@ const mapStateToProps = state => ({
   consumption: state.consumption,
 });
 
-export default connect(mapStateToProps, null)(injectIntl(HorizontalLinearStepper));
+const mapDispatchToProps = dispatch => ({
+  resetAge: () => dispatch(resetAge()),
+  resetConsumption: () => dispatch(resetConsumption()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(HorizontalLinearStepper));
