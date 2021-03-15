@@ -58,5 +58,6 @@ export function fetchFoodIfNeeded(categoryId) {
     if (shouldFetchFood(getState(), categoryId)) {
       return dispatch(fetchFood(categoryId));
     }
+    return getState().foodByCategory[categoryId];
   };
 }

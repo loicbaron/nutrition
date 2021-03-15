@@ -1,7 +1,11 @@
+/* eslint-disable no-case-declarations */
+/* eslint-disable no-shadow */
+/* eslint-disable no-restricted-syntax */
 import {
   SELECT_PORTION, RESET_PORTION, CLEAR_SELECTED_PORTIONS, ADD_TO_CONSUMPTION, RESET_CONSUMPTION,
 } from './consumptionActions';
 
+const portions = {};
 const initialState = {
   selected: {},
   result: {},
@@ -10,9 +14,7 @@ const initialState = {
 function consumption(state = initialState, action) {
   switch (action.type) {
     case SELECT_PORTION:
-      // eslint-disable-next-line no-case-declarations
       const { item, position, age } = action.payload;
-      // eslint-disable-next-line no-case-declarations
       const { weight } = item.portions
         .find(portion => portion.position === position && portion.type === age) || 0;
       return {
@@ -27,9 +29,7 @@ function consumption(state = initialState, action) {
         },
       };
     case RESET_PORTION:
-      // eslint-disable-next-line no-case-declarations
       const key = action.payload.item.id;
-      // eslint-disable-next-line no-case-declarations
       const { [key]: value, ...withoutKey } = state.selected;
       return {
         ...state,
@@ -41,7 +41,6 @@ function consumption(state = initialState, action) {
         selected: {},
       };
     case ADD_TO_CONSUMPTION:
-      const portions = {};
       for (const [id, item] of Object.entries(state.selected)) {
         const currentWeight = state.result[id] ? state.result[id].weight : 0;
         item.weight = item.weight ? item.weight : 0;
