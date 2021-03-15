@@ -4,7 +4,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { Typography, withStyles } from '@material-ui/core';
 import { anyNumberOfChildren } from '../miscellaneousProps';
 
-export default function TooltipControlled({children, title, text}) {
+export default function TooltipControlled({ children, title, text }) {
   const [open, setOpen] = React.useState(true);
 
   const handleClose = () => {
@@ -15,28 +15,30 @@ export default function TooltipControlled({children, title, text}) {
     setOpen(true);
   };
 
-  const HtmlTooltip = withStyles((theme) => ({
+  const HtmlTooltip = withStyles(theme => ({
     tooltip: {
-        backgroundColor: '#f50057',
-        color: 'white',
-        maxWidth: 220,
-        fontSize: theme.typography.pxToRem(12),
-        border: '1px solid #dadde9',
+      backgroundColor: '#f50057',
+      color: 'white',
+      maxWidth: 220,
+      fontSize: theme.typography.pxToRem(12),
+      border: '1px solid #dadde9',
     },
   }))(Tooltip);
   return (
-        <HtmlTooltip
-            title={
-            <React.Fragment>
-            <Typography color="inherit">{title}</Typography>
-            {text}
-            </React.Fragment>
-            }
-            open={open} onClose={handleClose} onOpen={handleOpen}
-            arrow
-        >
-            { children }
-        </HtmlTooltip>
+    <HtmlTooltip
+      title={(
+        <React.Fragment>
+          <Typography color="inherit">{title}</Typography>
+          {text}
+        </React.Fragment>
+          )}
+      open={open}
+      onClose={handleClose}
+      onOpen={handleOpen}
+      arrow
+    >
+      { children }
+    </HtmlTooltip>
   );
 }
 

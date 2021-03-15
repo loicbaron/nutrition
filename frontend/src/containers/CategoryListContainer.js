@@ -66,6 +66,3 @@ class CategoryListContainer extends Component {
   }
 }
 export default CategoryListContainer;
-
-
-

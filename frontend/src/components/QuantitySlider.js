@@ -56,9 +56,9 @@ const QuantitySlider = (props) => {
     keys, onSelect, currentQuantity,
   } = props;
   const myMarks = marks.filter(mark => keys.includes(mark.label));
-  const width = [...myMarks].pop().width;
+  const { width } = [...myMarks].pop();
   return (
-    <div style={{'width': width}}>
+    <div style={{ width }}>
       <Slider
         value={currentQuantity}
         getAriaValueText={valuetext}

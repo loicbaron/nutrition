@@ -25,25 +25,26 @@ const FoodPictures = ({
 }) => {
   const images = [<Grid item xs={1} key="image_0"> &nbsp; </Grid>];
   const letters = [<Grid item xs={1} key="letter_0"> &nbsp; </Grid>];
-  const portions = item.portions.filter((p) => p.type === age);
+  const portions = item.portions.filter(p => p.type === age);
   const sortedLetters = portions.map(p => p.letter).sort();
   sortedLetters.forEach((letter) => {
     letters.push(<Grid item xs={1} key={letter}>{letter}</Grid>);
     images.push(FoodImage(letter, age, portions.find(p => p.letter === letter).image));
   });
-  const currentQuantity = consumption.selected[item.id] ? consumption.selected[item.id].position : 0;
+  const currentQuantity = consumption.selected[item.id]
+    ? consumption.selected[item.id].position : 0;
   return (
     <div style={{ width: '100%' }}>
-        <Grid container justify="space-evenly">
-          { images }
-        </Grid>
-        <Grid container justify="space-evenly">
-            <QuantitySlider
-              keys={sortedLetters}
-              onSelect={position => selectPortion(item, position, age)}
-              currentQuantity={currentQuantity}
-            />
-        </Grid>
+      <Grid container justify="space-evenly">
+        { images }
+      </Grid>
+      <Grid container justify="space-evenly">
+        <QuantitySlider
+          keys={sortedLetters}
+          onSelect={position => selectPortion(item, position, age)}
+          currentQuantity={currentQuantity}
+        />
+      </Grid>
     </div>
   );
 };
