@@ -1,4 +1,4 @@
-
+/* eslint-disable camelcase */
 import PropTypes from 'prop-types';
 import Composition from './Composition';
 import Portion from './Portion';
@@ -145,7 +145,7 @@ export default class Food {
       Vitamine_B6_mg,
       Vitamine_B9_microg,
       Vitamine_B12_microg,
-      Vitamine_C_mg
+      Vitamine_C_mg,
     );
     this.portions = portions;
   }
@@ -159,17 +159,3 @@ export default class Food {
     });
   }
 }
-
-/*
-
-portions: "[{"C": "312", "G": "620", "A": "149", "B": "230", "D": "393", "E": "469", "F": "544", "type": "child"}, {"C": "545", "G": "1140", "A": "241", "B": "393", "D": "697", "E": "845", "F": "992", "type": "adult"}]"
-
-[
-  {
-  position: 1,
-  letter: 'A',
-  type: 'child',
-  weight: 149,
-  }
-]
-*/

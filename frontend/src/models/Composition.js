@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 
 import PropTypes from 'prop-types';
 
@@ -36,36 +37,36 @@ export default class Composition {
     Vitamine_B12_microg,
     Vitamine_C_mg,
   ) {
-    return new Composition({ 
-        Energie_kcal,
-        Energie_kJ,
-        Eau_g,
-        Protéines_g,
-        Lipides_g,
-        Glucides_g,
-        Fibres_g,
-        Cendres_g,
-        Calcium_mg,
-        Fer_mg,
-        Magnesium_mg,
-        Phosphore_mg,
-        Potassium_mg,
-        Sodium_mg,
-        Zinc_mg,
-        Cuivre_mg,
-        Vitamine_A_microg,
-        Retinol_microg,
-        betacarotene_microg,
-        Vitamine_D_microg,
-        Vitamine_E_mg,
-        Vitamine_B1_mg,
-        Vitamine_B2_mg,
-        Vitamine_B3_mg,
-        Vitamine_B6_mg,
-        Vitamine_B9_microg,
-        Vitamine_B12_microg,
-        Vitamine_C_mg,
-     });
+    return new Composition({
+      Energie_kcal,
+      Energie_kJ,
+      Eau_g,
+      Protéines_g,
+      Lipides_g,
+      Glucides_g,
+      Fibres_g,
+      Cendres_g,
+      Calcium_mg,
+      Fer_mg,
+      Magnesium_mg,
+      Phosphore_mg,
+      Potassium_mg,
+      Sodium_mg,
+      Zinc_mg,
+      Cuivre_mg,
+      Vitamine_A_microg,
+      Retinol_microg,
+      betacarotene_microg,
+      Vitamine_D_microg,
+      Vitamine_E_mg,
+      Vitamine_B1_mg,
+      Vitamine_B2_mg,
+      Vitamine_B3_mg,
+      Vitamine_B6_mg,
+      Vitamine_B9_microg,
+      Vitamine_B12_microg,
+      Vitamine_C_mg,
+    });
   }
 
   static fromBlob(blob) {
