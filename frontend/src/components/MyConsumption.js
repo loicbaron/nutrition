@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -41,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 
 const MyConsumption = ({
   consumption,
-  intl
+  intl,
 }) => {
   const classes = useStyles();
   const results = Object.values(consumption.result);
@@ -116,6 +117,8 @@ const MyConsumption = ({
 
 MyConsumption.propTypes = {
   consumption: Consumption.shape.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  intl: PropTypes.object.isRequired,
 };
 
 export default injectIntl(MyConsumption);
