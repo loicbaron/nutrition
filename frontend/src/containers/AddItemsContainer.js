@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Fab } from '@material-ui/core';
@@ -7,6 +8,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 import TooltipControlled from '../components/Navigation/TooltipControlled';
 import { addSelectedPortions, resetAllPortions } from '../store/Consumption/consumptionActions';
+import Consumption from '../models/Consumption';
 
 const styles = theme => ({
   fabButton: {
@@ -16,6 +18,7 @@ const styles = theme => ({
   },
 });
 const AddItems = ({
+  // eslint-disable-next-line no-shadow
   intl, classes, consumption, addSelectedPortions, resetAllPortions,
 }) => {
   if (Object.keys(consumption.selected).length > 0) {
@@ -52,4 +55,17 @@ const mapDispatchToProps = dispatch => ({
   addSelectedPortions: () => dispatch(addSelectedPortions()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(injectIntl(AddItems)));
+AddItems.propTypes = {
+  consumption: Consumption.shape.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  intl: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  classes: PropTypes.object.isRequired,
+  addSelectedPortions: PropTypes.func.isRequired,
+  resetAllPortions: PropTypes.func.isRequired,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withStyles(styles)(injectIntl(AddItems)));
