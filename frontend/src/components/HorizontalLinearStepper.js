@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import Stepper from '@material-ui/core/Stepper';
@@ -55,7 +56,8 @@ class HorizontalLinearStepper extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { consumption } = this.props;
-    if (prevState.activeStep !== this.state.activeStep) {
+    const { activeStep } = this.state;
+    if (prevState.activeStep !== activeStep) {
       if (Object.keys(consumption.result).length > 0) {
         this.setNextActive(true);
         this.setTooltipActive(false);
@@ -93,6 +95,7 @@ class HorizontalLinearStepper extends React.Component {
     skipped.has(step);
   };
 
+  // eslint-disable-next-line no-unused-vars
   isStepOptional = step => false;
 
   handleNext = () => {
@@ -129,8 +132,10 @@ class HorizontalLinearStepper extends React.Component {
   };
 
   handleReset = () => {
-    this.props.resetConsumption();
-    this.props.resetAge();
+    // eslint-disable-next-line no-shadow
+    const { resetAge, resetConsumption } = this.props;
+    resetConsumption();
+    resetAge();
     this.setState({ activeStep: 0 });
   };
 
@@ -184,7 +189,11 @@ class HorizontalLinearStepper extends React.Component {
             <div>
               <div className="stepper-buttons-container">
                 <div className="stepper-buttons-start">
-                  <Button disabled={activeStep === 0} onClick={this.handleBack} className={this.classes.button}>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={this.handleBack}
+                    className={this.classes.button}
+                  >
                     <FormattedMessage id="Back" />
                   </Button>
                 </div>
@@ -202,7 +211,11 @@ class HorizontalLinearStepper extends React.Component {
             <div>
               <div className="stepper-buttons-container">
                 <div className="stepper-buttons-start">
-                  <Button disabled={activeStep === 0} onClick={this.handleBack} className={this.classes.button}>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={this.handleBack}
+                    className={this.classes.button}
+                  >
                     <FormattedMessage id="Back" />
                   </Button>
                 </div>
@@ -235,6 +248,10 @@ class HorizontalLinearStepper extends React.Component {
 
 HorizontalLinearStepper.propTypes = {
   consumption: Consumption.shape.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  intl: PropTypes.object.isRequired,
+  resetAge: PropTypes.func.isRequired,
+  resetConsumption: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
